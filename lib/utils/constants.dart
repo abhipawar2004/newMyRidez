@@ -17,6 +17,6 @@ const Color ctb =  Color(0xff87CEEB);
 const Color cgr =  Color(0xff00FF00);
 const Color cgo =  Color(0xffFFA500);
 
-
-
+const Color bg = Color.fromARGB(255, 18, 31, 58);
+const Color primary = Color(0xFF0D63C7);
 

@@ -88,7 +88,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
               height: 48.h,
               errorBuilder: (context, error, stackTrace) {
                 // Fallback to icon if image not found
-                return Icon(Icons.location_on, size: 48.sp, color: c1);
+                return Icon(Icons.location_on, size: 48.sp, color: bg);
               },
             ),
           ),
@@ -101,7 +101,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
             child: Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color.fromARGB(255, 212, 212, 212),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -124,7 +124,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.location_on, color: c1, size: 20.sp),
+                            Icon(Icons.location_on, color: bg, size: 20.sp),
                             SizedBox(width: 8.w),
                             Expanded(
                               child: Text(
@@ -137,7 +137,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                         SizedBox(height: 4.h),
                         Row(
                           children: [
-                            Icon(Icons.location_on, color: c1, size: 20.sp),
+                            Icon(Icons.location_on, color: bg, size: 20.sp),
                             SizedBox(width: 8.w),
                             Expanded(
                               child: Text(
@@ -181,7 +181,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: c1,
+                        backgroundColor: bg,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.r),
                         ),
@@ -220,7 +220,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
               },
               backgroundColor: Colors.white,
               mini: true,
-              child: Icon(Icons.my_location, color: c1),
+              child: Icon(Icons.my_location, color: bg),
             ),
           ),
         ],

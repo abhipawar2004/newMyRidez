@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "featureType": "road",
       "elementType": "geometry",
       "stylers": [
-        { "color": "#e8e8e8" }
+        { "color": "#737373" }
       ]
     },
     {
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       "featureType": "landscape",
       "stylers": [
-        { "color": "#f5f5f5" }
+        { "color": "#0D1428" }
       ]
     },
     {
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (mapController != null) {
         mapController!.animateCamera(
           CameraUpdate.newCameraPosition(
-            CameraPosition(target: _currentPosition!, zoom: 15.0),
+            CameraPosition(target: _currentPosition!, zoom: 17.0),
           ),
         );
       }
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_currentPosition != null) {
       controller.animateCamera(
         CameraUpdate.newCameraPosition(
-          CameraPosition(target: _currentPosition!, zoom: 15.0),
+          CameraPosition(target: _currentPosition!, zoom: 17.0),
         ),
       );
     }
@@ -156,6 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: null,
       drawer: const AppDrawer(),
+      backgroundColor: bg,
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Stack(
@@ -170,12 +171,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     onMapCreated: _onMapCreated,
                     initialCameraPosition: CameraPosition(
                       target: _currentPosition ?? _defaultCenter,
-                      zoom: 18.0,
+                      zoom: 25.0,
                     ),
                     myLocationEnabled: true,
 
-                    zoomControlsEnabled: false, 
+                    zoomControlsEnabled: false,
                     buildingsEnabled: false,
+
                     style: _mapStyle,
                   ),
                 ),
@@ -187,11 +189,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Builder(
                     builder: (context) => Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ).withOpacity(0.2),
                             spreadRadius: 1,
                             blurRadius: 6,
                             offset: const Offset(0, 2),
@@ -199,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       child: IconButton(
-                        icon: const Icon(Icons.menu, color: c1),
+                        icon: const Icon(Icons.menu, color: bg),
                         onPressed: () => Scaffold.of(context).openDrawer(),
                       ),
                     ),
@@ -225,11 +232,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: screenHeight * _sheetHeight,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: bg,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                         ),
+                        border: Border.all(color: Colors.white, width: 1),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black12,
@@ -292,6 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -316,9 +325,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _recentTile(String title, String subtitle) {
     return ListTile(
-      leading: const Icon(Icons.access_time),
-      title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
-      subtitle: Text(subtitle, maxLines: 1, overflow: TextOverflow.ellipsis),
+      leading: const Icon(Icons.access_time, color: Colors.white70),
+      title: Text(
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(color: Colors.white),
+      ),
+      subtitle: Text(
+        subtitle,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(color: Colors.white70),
+      ),
       dense: true,
     );
   }

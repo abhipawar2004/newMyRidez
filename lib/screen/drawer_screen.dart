@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ride_app/utils/constants.dart';
+import 'Authentication/BottomNavigationBar/account_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -7,98 +9,166 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.horizontal(right: Radius.circular(20)),
+      ),
+      child: Column(
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [c1,c1],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
+          _buildHeader(),
+
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.person, size: 35, color: Colors.teal[700]),
-                ),
                 const SizedBox(height: 10),
-                const Text(
+
+                _sectionTitle("Menu"),
+                _drawerTile(Icons.home_outlined, "Home", () {
+                  Navigator.pop(context);
+                }),
+                _drawerTile(Icons.history_outlined, "My Rides History", () {
+                  Navigator.pop(context);
+                }),
+                _drawerTile(Icons.credit_card_outlined, "Payment Methods", () {
+                  Navigator.pop(context);
+                }),
+                _drawerTile(Icons.person_outline, "Account", () {
+                  Navigator.pop(context);
+                  Get.to(() => const ProfileScreen());
+                }),
+
+                const SizedBox(height: 10),
+
+                _sectionTitle("Legal & Others"),
+                _drawerTile(Icons.settings_outlined, "Settings", () {}),
+                _drawerTile(Icons.privacy_tip_outlined, "Privacy Policy", () {}),
+                _drawerTile(Icons.description_outlined, "Terms & Conditions", () {}),
+
+                const SizedBox(height: 10),
+
+                _logoutTile(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // -------------------- UI Components --------------------
+
+  Widget _buildHeader() {
+    return DrawerHeader(
+      margin: EdgeInsets.zero,
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [bg, bg.withOpacity(.7)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 32,
+              backgroundColor: Colors.white,
+              child: Icon(Icons.person, size: 40, color: bg),
+            ),
+            const SizedBox(width: 15),
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                   'Abhishek Pawar',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 19,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'View Profile',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 13,
                   ),
                 ),
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _sectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      child: Text(
+        title.toUpperCase(),
+        style: TextStyle(
+          fontSize: 11,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1,
+        ),
+      ),
+    );
+  }
+
+  Widget _drawerTile(IconData icon, String title, VoidCallback onTap) {
+    return Card(
+      color: Colors.transparent,
+      elevation: 0,
+      margin: const EdgeInsets.symmetric(vertical: 3),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [bg.withOpacity(0.9), bg.withOpacity(0.6)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          ListTile(
-            leading: const Icon(Icons.home_outlined),
-            title: const Text('Home'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: ListTile(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          leading: Icon(icon, color: Colors.white),
+          title: Text(title, style: const TextStyle(fontSize: 15, color: Colors.white)),
+          onTap: onTap,
+        ),
+      ),
+    );
+  }
+
+  Widget _logoutTile() {
+    return Card(
+      color: Colors.transparent,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Container(
+             decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [bg.withOpacity(0.9), bg.withOpacity(0.6)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          ListTile(
-            leading: const Icon(Icons.directions_car_outlined),
-            title: const Text('My Rides'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: ListTile(
+          leading: const Icon(Icons.logout, color: Colors.white),
+          title: const Text(
+            "Logout",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          ListTile(
-            leading: const Icon(Icons.payment_outlined),
-            title: const Text('Payment Methods'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.history),
-            title: const Text('Ride History'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.settings_outlined),
-            title: const Text('Settings'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.help_outline),
-            title: const Text('Help & Support'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: const Text('About'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red),
-            title: const Text('Logout', style: TextStyle(color: Colors.red)),
-            onTap: () {
-              Navigator.pop(context);
-              // Add logout logic
-            },
-          ),
-        ],
+          onTap: () {},
+        ),
       ),
     );
   }

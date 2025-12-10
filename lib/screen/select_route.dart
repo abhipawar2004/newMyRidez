@@ -54,16 +54,16 @@ class _RouteScreenState extends State<RouteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: bg,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.close, color: Colors.black, size: 28.sp),
+          icon: Icon(Icons.close, color: Colors.white, size: 28.sp),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Your route',
           style: GoogleFonts.roboto(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 20.sp,
             fontWeight: FontWeight.w500,
           ),
@@ -74,7 +74,7 @@ class _RouteScreenState extends State<RouteScreen> {
           // Route input fields
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: bg,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
@@ -96,7 +96,7 @@ class _RouteScreenState extends State<RouteScreen> {
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: _isPickupFocused
-                                    ? c1
+                                    ? Colors.white
                                     : Colors.grey,
                                 width: 2.0,
                               ),
@@ -110,7 +110,7 @@ class _RouteScreenState extends State<RouteScreen> {
                                   ),
                                   child: Icon(
                                     Icons.search,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     size: 24.sp,
                                   ),
                                 ),
@@ -121,7 +121,7 @@ class _RouteScreenState extends State<RouteScreen> {
                                     decoration: InputDecoration(
                                       hintText: 'Pickup location',
                                       hintStyle: TextStyle(
-                                        color: Colors.black38,
+                                        color: Colors.white,
                                         fontSize: 16.sp,
                                       ),
                                       border: OutlineInputBorder(
@@ -130,6 +130,10 @@ class _RouteScreenState extends State<RouteScreen> {
                                       contentPadding: EdgeInsets.symmetric(
                                         vertical: 9.h,
                                       ),
+                                    ),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.sp,
                                     ),
                                   ),
                                 ),
@@ -141,7 +145,7 @@ class _RouteScreenState extends State<RouteScreen> {
                         IconButton(
                           icon: Icon(
                             Icons.add,
-                            color: Colors.black,
+                            color: Colors.white,
                             size: 24.sp,
                           ),
                           onPressed: () {},
@@ -157,7 +161,7 @@ class _RouteScreenState extends State<RouteScreen> {
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: _isDropoffFocused
-                                    ? c1
+                                    ? Colors.white
                                     : Colors.grey,
                                 width: 2.0,
                               ),
@@ -171,7 +175,7 @@ class _RouteScreenState extends State<RouteScreen> {
                                   ),
                                   child: Icon(
                                     Icons.circle_outlined,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     size: 20.sp,
                                   ),
                                 ),
@@ -182,7 +186,7 @@ class _RouteScreenState extends State<RouteScreen> {
                                     decoration: InputDecoration(
                                       hintText: 'Dropoff location',
                                       hintStyle: TextStyle(
-                                        color: Colors.black38,
+                                        color: Colors.white,
                                         fontSize: 16.sp,
                                       ),
                                       border: InputBorder.none,
@@ -190,17 +194,20 @@ class _RouteScreenState extends State<RouteScreen> {
                                         vertical: 9.h,
                                       ),
                                     ),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.sp,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
                         ),
-
                         IconButton(
                           icon: Icon(
                             Icons.swap_vert,
-                            color: Colors.black,
+                            color: Colors.white,
                             size: 24.sp,
                           ),
                           onPressed: () {
@@ -262,7 +269,7 @@ class _RouteScreenState extends State<RouteScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: c1,
+                  backgroundColor: bg,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
                   ),

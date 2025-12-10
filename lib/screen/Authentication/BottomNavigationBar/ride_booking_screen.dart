@@ -127,9 +127,9 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             circleId: CircleId('ripple_$i'),
             center: widget.pickupLocation,
             radius: radius,
-            strokeColor: c1.withOpacity(opacity * 0.6),
+            strokeColor: bg.withOpacity(opacity * 0.6),
             strokeWidth: 3,
-            fillColor: c1.withOpacity(opacity * 0.1),
+            fillColor: bg.withOpacity(opacity * 0.1),
           ),
         );
       }
@@ -141,9 +141,9 @@ class _RideBookingScreenState extends State<RideBookingScreen>
           circleId: const CircleId('pulse_center'),
           center: widget.pickupLocation,
           radius: 15, // small radius in meters
-          strokeColor: c1.withOpacity(pulseOpacity),
+          strokeColor: bg.withOpacity(pulseOpacity),
           strokeWidth: 4,
-          fillColor: c1.withOpacity(pulseOpacity * 0.5),
+          fillColor: bg.withOpacity(pulseOpacity * 0.5),
         ),
       );
     });
@@ -320,7 +320,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             style: GoogleFonts.roboto(
               fontSize: 22.sp,
               fontWeight: FontWeight.bold,
-              color: c1,
+              color: bg,
             ),
           ),
 
@@ -488,7 +488,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 1.h),
                 decoration: BoxDecoration(
-                  color: c1,
+                  color: bg,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: DropdownButtonHideUnderline(
@@ -503,7 +503,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                       fontSize: 13.sp,
                       color: cw,
                     ),
-                    dropdownColor: c1,
+                    dropdownColor: bg,
                     items: _paymentMethods.map((method) {
                       return DropdownMenuItem<String>(
                         value: method,
@@ -539,7 +539,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _selectedVehicleIndex == null
                           ? Colors.grey.shade300
-                          : c1,
+                          : bg,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.r),
                       ),

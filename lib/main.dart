@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ride_app/screen/Authentication/register.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:ride_app/utils/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'My Ride App',
           theme: ThemeData(
-            primarySwatch: Colors.green,
-            scaffoldBackgroundColor: Colors.white,
+            primaryColor: primary,
+
           ),
         
           home: const PhoneSignInScreen(),
