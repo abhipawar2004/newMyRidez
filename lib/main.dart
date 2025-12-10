@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ride_app/screen/Authentication/register.dart';
-import 'package:ride_app/screen/basescreen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
