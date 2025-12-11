@@ -36,6 +36,54 @@ class _RideBookingScreenState extends State<RideBookingScreen>
   late AnimationController _animationController;
   late Animation<double> _animation;
 
+  final String _mapStyle = '''[
+    {
+      "featureType": "poi",
+      "stylers": [
+        { "visibility": "on" }
+      ]
+    },
+    {
+      "featureType": "transit",
+      "stylers": [
+        { "visibility": "on" }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "labels.icon",
+      "stylers": [
+        { "visibility": "on" }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "geometry",
+      "stylers": [
+        { "color": "#737373" }
+      ]
+    },
+    {
+      "featureType": "water",
+      "stylers": [
+        { "color": "#d6e6f3" }
+      ]
+    },
+    {
+      "featureType": "landscape",
+      "stylers": [
+        { "color": "#0D1428" }
+      ]
+    },
+    {
+      "featureType": "administrative",
+      "elementType": "labels",
+      "stylers": [
+        { "visibility": "off" }
+      ]
+    }
+  ]''';
+
   // Sample vehicle data
   final List<Map<String, dynamic>> _vehicles = [
     {
@@ -240,6 +288,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
         children: [
           // Google Map with markers and route
           GoogleMap(
+            
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: widget.pickupLocation,
@@ -251,6 +300,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
             zoomControlsEnabled: false,
+            style: _mapStyle,
           ),
 
           // Back button
@@ -284,7 +334,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             builder: (context, scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: bg,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),
                     topRight: Radius.circular(20.r),
@@ -320,7 +370,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             style: GoogleFonts.roboto(
               fontSize: 22.sp,
               fontWeight: FontWeight.bold,
-              color: bg,
+              color: Colors.white,
             ),
           ),
 
@@ -340,7 +390,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
           height: 4.h,
           margin: EdgeInsets.symmetric(vertical: 12.h),
           decoration: BoxDecoration(
-            color: Colors.grey.shade300,
+            color: Colors.white70,
             borderRadius: BorderRadius.circular(2.r),
           ),
         ),
@@ -356,9 +406,10 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                 style: GoogleFonts.roboto(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w700,
+                  color: Colors.white,
                 ),
               ),
-              Icon(Icons.info_outline, size: 20.sp, color: c1),
+              Icon(Icons.info_outline, size: 20.sp, color: Colors.white),
             ],
           ),
         ),
@@ -385,9 +436,9 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                   margin: EdgeInsets.only(bottom: 12.h),
                   padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
-                    color: isSelected ? c1.withOpacity(0.1) : Colors.white,
+                    color: isSelected ? Colors.blue.withOpacity(0.1) : bg.withOpacity(0.1),
                     border: Border.all(
-                      color: isSelected ? c1 : Colors.grey.shade300,
+                      color: isSelected ? Colors.blue : Colors.white70,
                       width: isSelected ? 2 : 1,
                     ),
                     borderRadius: BorderRadius.circular(12.r),
@@ -398,10 +449,10 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                       Container(
                         padding: EdgeInsets.all(10.w),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
+                          color: Colors.white24,
                           borderRadius: BorderRadius.circular(8.r),
                         ),
-                        child: Icon(vehicle['icon'], size: 32.sp, color: c1),
+                        child: Icon(vehicle['icon'], size: 32.sp, color: Colors.white),
                       ),
 
                       SizedBox(width: 12.w),
@@ -418,16 +469,16 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                                   style: GoogleFonts.roboto(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.bold,
-                                    color: c1,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 SizedBox(width: 6.w),
-                                Icon(Icons.person, size: 14.sp, color: cg),
+                                Icon(Icons.person, size: 14.sp, color: Colors.white70),
                                 Text(
                                   '${vehicle['passengers']}',
                                   style: GoogleFonts.roboto(
                                     fontSize: 12.sp,
-                                    color: cg,
+                                    color: Colors.white70,
                                   ),
                                 ),
                               ],
@@ -437,7 +488,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                               vehicle['type'],
                               style: GoogleFonts.roboto(
                                 fontSize: 12.sp,
-                                color: Colors.grey.shade600,
+                                color: Colors.white70,
                               ),
                             ),
                             SizedBox(height: 4.h),
@@ -445,7 +496,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                               '${vehicle['eta']} away',
                               style: GoogleFonts.roboto(
                                 fontSize: 12.sp,
-                                color: c1,
+                                color: Colors.white,
                               ),
                             ),
                           ],
@@ -458,7 +509,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                         style: GoogleFonts.roboto(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
-                          color: c1,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -473,7 +524,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
         Container(
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: bg,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
@@ -488,7 +539,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 1.h),
                 decoration: BoxDecoration(
-                  color: bg,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: DropdownButtonHideUnderline(
@@ -496,14 +547,14 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                     value: _selectedPaymentMethod,
                     icon: Icon(
                       Icons.keyboard_arrow_down,
-                      color: cw,
+                      color: Colors.black,
                       size: 20.sp,
                     ),
                     style: GoogleFonts.roboto(
                       fontSize: 13.sp,
-                      color: cw,
+                      color: Colors.black,
                     ),
-                    dropdownColor: bg,
+                    dropdownColor: Colors.white,
                     items: _paymentMethods.map((method) {
                       return DropdownMenuItem<String>(
                         value: method,
@@ -511,7 +562,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.roboto(
                               fontSize: 12.sp,
-                              color: cw,
+                              color: Colors.black,
                         )),
                       );
                     }).toList(),
@@ -539,7 +590,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _selectedVehicleIndex == null
                           ? Colors.grey.shade300
-                          : bg,
+                          : Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.r),
                       ),
@@ -553,8 +604,8 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
                         color: _selectedVehicleIndex == null
-                            ? Colors.grey.shade600
-                            : Colors.white,
+                            ? bg
+                            : bg,
                       ),
                     ),
                   ),
