@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:get/get.dart';
 import 'package:ride_app/screen/Authentication/BottomNavigationBar/home_screen.dart';
-import 'package:ride_app/screen/basescreen.dart';
-import 'package:ride_app/utils/constants.dart';
 
 class PhoneSignInScreen extends StatefulWidget {
   const PhoneSignInScreen({super.key});
@@ -38,8 +36,16 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bg,
-      body: SafeArea(
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black],
+          ),
+        ),
+        child: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SingleChildScrollView(
@@ -146,12 +152,13 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                     children: [
                       Checkbox(
                         value: _agreed,
-                        activeColor: const Color(0xFF0D63C7),
+                        activeColor: const Color.fromARGB(255, 2, 120, 255),
                         onChanged: (value) {
                           setState(() {
                             _agreed = value ?? false;
                           });
                         },
+                        checkColor: Colors.white,
                       ),
                       SizedBox(width: 8.w),
                       Expanded(
@@ -178,7 +185,7 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0D63C7),
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.r),
                       ),
@@ -191,7 +198,7 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -222,22 +229,22 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       "https://upload.wikimedia.org/wikipedia/commons/0/09/IOS_Google_icon.png",
                   text: "Continue with Google",
                 ),
-
                 SizedBox(height: 16.h),
-
                 /// FACEBOOK
                 _socialButton(
                   icon:
                       "https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png",
                   text: "Continue with Facebook",
                 ),
+                
               ],
             ),
           ),
         ),
       ),
-    );
+    ));
   }
+
   /// SOCIAL BUTTON WIDGET
   Widget _socialButton({required String icon, required String text}) {
     return Container(

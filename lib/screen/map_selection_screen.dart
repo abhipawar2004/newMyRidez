@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
-import '../utils/constants.dart';
 import 'Authentication/BottomNavigationBar/ride_booking_screen.dart';
 
 class MapSelectionScreen extends StatefulWidget {
@@ -88,7 +87,11 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
               height: 48.h,
               errorBuilder: (context, error, stackTrace) {
                 // Fallback to icon if image not found
-                return Icon(Icons.location_on, size: 48.sp, color: bg);
+                return Icon(
+                  Icons.location_on,
+                  size: 48.sp,
+                  color: Colors.black,
+                );
               },
             ),
           ),
@@ -101,7 +104,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
             child: Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 212, 212, 212),
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -124,7 +127,11 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.location_on, color: bg, size: 20.sp),
+                            Icon(
+                              Icons.location_on,
+                              color: Colors.black,
+                              size: 20.sp,
+                            ),
                             SizedBox(width: 8.w),
                             Expanded(
                               child: Text(
@@ -137,7 +144,11 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                         SizedBox(height: 4.h),
                         Row(
                           children: [
-                            Icon(Icons.location_on, color: bg, size: 20.sp),
+                            Icon(
+                              Icons.location_on,
+                              color: Colors.black,
+                              size: 20.sp,
+                            ),
                             SizedBox(width: 8.w),
                             Expanded(
                               child: Text(
@@ -181,7 +192,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: bg,
+                        backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.r),
                         ),
@@ -220,7 +231,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
               },
               backgroundColor: Colors.white,
               mini: true,
-              child: Icon(Icons.my_location, color: bg),
+              child: Icon(Icons.my_location, color: Colors.black),
             ),
           ),
         ],

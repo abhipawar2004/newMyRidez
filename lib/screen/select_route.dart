@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
-import '../utils/constants.dart';
 import 'map_selection_screen.dart';
 
 class RouteScreen extends StatefulWidget {
@@ -54,7 +53,16 @@ class _RouteScreenState extends State<RouteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: bg,
+        backgroundColor: Colors.black,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [const Color.fromARGB(255, 0, 0, 0)!, Colors.black],
+            ),
+          ),
+        ),
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.close, color: Colors.white, size: 28.sp),
@@ -74,7 +82,11 @@ class _RouteScreenState extends State<RouteScreen> {
           // Route input fields
           Container(
             decoration: BoxDecoration(
-              color: bg,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [const Color.fromARGB(255, 124, 18, 245)!, Colors.black],
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
@@ -97,7 +109,7 @@ class _RouteScreenState extends State<RouteScreen> {
                               border: Border.all(
                                 color: _isPickupFocused
                                     ? Colors.white
-                                    : Colors.grey,
+                                    : Colors.grey[600]!,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(12.r),
@@ -162,7 +174,7 @@ class _RouteScreenState extends State<RouteScreen> {
                               border: Border.all(
                                 color: _isDropoffFocused
                                     ? Colors.white
-                                    : Colors.grey,
+                                    : Colors.grey[600]!,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(12.r),
@@ -269,7 +281,7 @@ class _RouteScreenState extends State<RouteScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: bg,
+                  backgroundColor: const Color.fromARGB(255, 0, 0, 0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
                   ),

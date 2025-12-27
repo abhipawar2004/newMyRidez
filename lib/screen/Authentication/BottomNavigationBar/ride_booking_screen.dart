@@ -25,12 +25,18 @@ class RideBookingScreen extends StatefulWidget {
 class _RideBookingScreenState extends State<RideBookingScreen>
     with SingleTickerProviderStateMixin {
   // Payment methods for dropdrawer
-  final List<String> _paymentMethods = ['Cash', 'UPI', 'Card', 'Wallet', 'Net-Banking'];
+  final List<String> _paymentMethods = [
+    'Cash',
+    'UPI',
+    'Card',
+    'Wallet',
+    'Net-Banking',
+  ];
   String _selectedPaymentMethod = 'Cash';
 
   Set<Marker> _markers = {};
   Set<Polyline> _polylines = {};
-  Set<Circle> _circles = {};
+  final Set<Circle> _circles = {};
   int? _selectedVehicleIndex;
   bool _isSearchingDriver = false;
   late AnimationController _animationController;
@@ -60,19 +66,19 @@ class _RideBookingScreenState extends State<RideBookingScreen>
       "featureType": "road",
       "elementType": "geometry",
       "stylers": [
-        { "color": "#737373" }
+        { "color": "#404040" }
       ]
     },
     {
       "featureType": "water",
       "stylers": [
-        { "color": "#d6e6f3" }
+        { "color": "#303030" }
       ]
     },
     {
       "featureType": "landscape",
       "stylers": [
-        { "color": "#0D1428" }
+        { "color": "#1a1a1a" }
       ]
     },
     {
@@ -217,13 +223,13 @@ class _RideBookingScreenState extends State<RideBookingScreen>
       ),
     };
 
-    // Create a simple straight line polyline (green color)
+    // Create a simple straight line polyline (white color)
     _polylines = {
       Polyline(
         polylineId: const PolylineId('route'),
         points: [widget.pickupLocation, widget.dropoffLocation],
-        color: Colors.blue, // Changed to BLUE to see it clearly
-        width: 8, // Made thicker
+        color: Colors.white,
+        width: 8,
         patterns: [PatternItem.dash(20), PatternItem.gap(10)],
       ),
     };
@@ -288,7 +294,6 @@ class _RideBookingScreenState extends State<RideBookingScreen>
         children: [
           // Google Map with markers and route
           GoogleMap(
-            
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: widget.pickupLocation,
@@ -334,7 +339,11 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             builder: (context, scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  color: bg,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.grey[900]!, Colors.black],
+                  ),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),
                     topRight: Radius.circular(20.r),
@@ -362,7 +371,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 10.h),
       child: Column(
-       mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Searching text
           Text(
@@ -374,7 +383,6 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             ),
           ),
 
-          
           SizedBox(height: 20.h),
         ],
       ),
@@ -436,9 +444,11 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                   margin: EdgeInsets.only(bottom: 12.h),
                   padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
-                    color: isSelected ? Colors.blue.withOpacity(0.1) : bg.withOpacity(0.1),
+                    color: isSelected
+                        ? Colors.grey.withOpacity(0.3)
+                        : Colors.grey.withOpacity(0.1),
                     border: Border.all(
-                      color: isSelected ? Colors.blue : Colors.white70,
+                      color: isSelected ? Colors.white : Colors.grey,
                       width: isSelected ? 2 : 1,
                     ),
                     borderRadius: BorderRadius.circular(12.r),
@@ -452,7 +462,11 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                           color: Colors.white24,
                           borderRadius: BorderRadius.circular(8.r),
                         ),
-                        child: Icon(vehicle['icon'], size: 32.sp, color: Colors.white),
+                        child: Icon(
+                          vehicle['icon'],
+                          size: 32.sp,
+                          color: Colors.white,
+                        ),
                       ),
 
                       SizedBox(width: 12.w),
@@ -473,7 +487,11 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                                   ),
                                 ),
                                 SizedBox(width: 6.w),
-                                Icon(Icons.person, size: 14.sp, color: Colors.white70),
+                                Icon(
+                                  Icons.person,
+                                  size: 14.sp,
+                                  color: Colors.white70,
+                                ),
                                 Text(
                                   '${vehicle['passengers']}',
                                   style: GoogleFonts.roboto(
@@ -524,7 +542,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
         Container(
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
-            color: bg,
+            color: Colors.black,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
@@ -558,12 +576,14 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                     items: _paymentMethods.map((method) {
                       return DropdownMenuItem<String>(
                         value: method,
-                        child: Text(method,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.roboto(
-                              fontSize: 12.sp,
-                              color: Colors.black,
-                        )),
+                        child: Text(
+                          method,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.roboto(
+                            fontSize: 12.sp,
+                            color: Colors.black,
+                          ),
+                        ),
                       );
                     }).toList(),
                     onChanged: (value) {
@@ -604,8 +624,8 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
                         color: _selectedVehicleIndex == null
-                            ? bg
-                            : bg,
+                            ? Colors.grey
+                            : Colors.black,
                       ),
                     ),
                   ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ride_app/utils/constants.dart';
 
 class UpcomingRidesScreen extends StatefulWidget {
   const UpcomingRidesScreen({super.key});
@@ -61,7 +60,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: c1,
+                    backgroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -105,7 +104,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
           Container(
             height: 3,
             width: 80,
-            color: isActive ? Color(0xff298458) : Colors.transparent,
+            color: isActive ? Colors.black : Colors.transparent,
           ),
         ],
       ),
@@ -143,7 +142,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
               child: Text(
                 'Learn how it works',
                 style: GoogleFonts.roboto(
-                  color: Color(0xff298458),
+                  color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -186,7 +185,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
               child: Text(
                 'View ride history',
                 style: GoogleFonts.roboto(
-                  color: Color(0xff298458),
+                  color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),

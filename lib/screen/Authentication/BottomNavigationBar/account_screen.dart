@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ride_app/utils/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -14,7 +13,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -26,11 +25,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircleAvatar(
                       radius: 40.r,
-                      backgroundColor: c1.withOpacity(.3),
+                      backgroundColor: Colors.grey.withOpacity(.3),
                       child: Icon(
                         Icons.person,
                         size: 45.sp,
-                        color: c1,
+                        color: Colors.black,
                       ),
                     ),
                     Positioned(
@@ -39,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Container(
                         padding: EdgeInsets.all(6.w),
                         decoration: BoxDecoration(
-                          color: c1,
+                          color: Colors.black,
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 2),
                         ),
@@ -58,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   style: GoogleFonts.roboto(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.w700,
-                    color: c1,
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -71,14 +70,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.teal[400]!,  c1],
+                  colors: [Colors.grey[700]!, Colors.grey[900]!],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(12.r),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.teal.withOpacity(0.2),
+                    color: Colors.grey.withOpacity(0.2),
                     spreadRadius: 0,
                     blurRadius: 6,
                     offset: const Offset(0, 2),
@@ -139,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w600,
-                        color: Colors.teal[700],
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -157,7 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   style: TextStyle(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[900],
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -236,21 +235,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     icon: Icons.home_outlined,
                     title: 'Enter home location',
                     onTap: () {},
-                    iconColor: Colors.blue[700],
+                    iconColor: Colors.black,
                   ),
                   const Divider(height: 1),
                   _buildMenuItem(
                     icon: Icons.work_outline,
                     title: 'Enter work location',
                     onTap: () {},
-                    iconColor: Colors.purple[700],
+                    iconColor: Colors.black,
                   ),
                   const Divider(height: 1),
                   _buildMenuItem(
                     icon: Icons.add_circle_outline,
                     title: 'Add a place',
                     onTap: () {},
-                    iconColor: Colors.teal[700],
+                    iconColor: Colors.black,
                   ),
                 ],
               ),
@@ -294,7 +293,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () {
                       _showLogoutDialog();
                     },
-                    iconColor: Colors.orange,
+                    iconColor: Colors.grey,
                   ),
                   const Divider(height: 1),
                   _buildMenuItem(
@@ -303,7 +302,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () {
                       _showDeleteAccountDialog();
                     },
-                    iconColor: Colors.red,
+                    iconColor: Colors.black,
                   ),
                 ],
               ),
@@ -354,7 +353,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
+                backgroundColor: Colors.black,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.r),
                 ),
@@ -380,7 +379,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             style: TextStyle(
               fontSize: 20.sp,
               fontWeight: FontWeight.bold,
-              color: Colors.red,
+              color: Colors.black,
             ),
           ),
           content: Text(
@@ -409,7 +408,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.black,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.r),
                 ),
@@ -429,7 +428,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Color? iconColor,
   }) {
     return ListTile(
-      leading: Icon(icon, color: iconColor ?? const Color.fromARGB(255, 0, 0, 0), size: 20.sp),
+      leading: Icon(
+        icon,
+        color: iconColor ?? const Color.fromARGB(255, 0, 0, 0),
+        size: 20.sp,
+      ),
       title: Text(
         title,
         style: GoogleFonts.roboto(fontSize: 13.sp, fontWeight: FontWeight.w700),

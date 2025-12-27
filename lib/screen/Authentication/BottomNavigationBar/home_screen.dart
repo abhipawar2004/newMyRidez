@@ -45,19 +45,19 @@ class _HomeScreenState extends State<HomeScreen> {
       "featureType": "road",
       "elementType": "geometry",
       "stylers": [
-        { "color": "#737373" }
+        { "color": "#404040" }
       ]
     },
     {
       "featureType": "water",
       "stylers": [
-        { "color": "#d6e6f3" }
+        { "color": "#303030" }
       ]
     },
     {
       "featureType": "landscape",
       "stylers": [
-        { "color": "#0D1428" }
+        { "color": "#1a1a1a" }
       ]
     },
     {
@@ -174,7 +174,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       zoom: 25.0,
                     ),
                     myLocationEnabled: true,
-
                     zoomControlsEnabled: false,
                     buildingsEnabled: false,
 
@@ -189,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Builder(
                     builder: (context) => Container(
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
+                        color: Colors.white,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -206,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       child: IconButton(
-                        icon: const Icon(Icons.menu, color: bg),
+                        icon: const Icon(Icons.menu, color: Colors.black),
                         onPressed: () => Scaffold.of(context).openDrawer(),
                       ),
                     ),
@@ -232,7 +231,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: screenHeight * _sheetHeight,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: bg,
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [const Color.fromARGB(255, 96, 10, 166)!, Colors.black],
+                        ),
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
@@ -274,18 +277,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                   horizontal: 15,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade100,
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.search, size: 24),
+                                    const Icon(
+                                      Icons.search,
+                                      size: 24,
+                                      color: Colors.black,
+                                    ),
                                     const SizedBox(width: 10),
                                     const Text(
                                       "Where to?",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                       ),
                                     ),
                                   ],

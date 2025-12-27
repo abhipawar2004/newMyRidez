@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ride_app/utils/constants.dart';
 import 'Authentication/BottomNavigationBar/account_screen.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -9,7 +8,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Colors.black,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.horizontal(right: Radius.circular(20)),
       ),
@@ -42,8 +41,16 @@ class AppDrawer extends StatelessWidget {
 
                 _sectionTitle("Legal & Others"),
                 _drawerTile(Icons.settings_outlined, "Settings", () {}),
-                _drawerTile(Icons.privacy_tip_outlined, "Privacy Policy", () {}),
-                _drawerTile(Icons.description_outlined, "Terms & Conditions", () {}),
+                _drawerTile(
+                  Icons.privacy_tip_outlined,
+                  "Privacy Policy",
+                  () {},
+                ),
+                _drawerTile(
+                  Icons.description_outlined,
+                  "Terms & Conditions",
+                  () {},
+                ),
 
                 const SizedBox(height: 10),
 
@@ -64,7 +71,7 @@ class AppDrawer extends StatelessWidget {
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [bg, bg.withOpacity(.7)],
+          colors: [Colors.grey[800]!, Colors.grey[900]!],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -76,7 +83,7 @@ class AppDrawer extends StatelessWidget {
             CircleAvatar(
               radius: 32,
               backgroundColor: Colors.white,
-              child: Icon(Icons.person, size: 40, color: bg),
+              child: Icon(Icons.person, size: 40, color: Colors.black),
             ),
             const SizedBox(width: 15),
             const Column(
@@ -94,10 +101,7 @@ class AppDrawer extends StatelessWidget {
                 SizedBox(height: 5),
                 Text(
                   'View Profile',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 13,
-                  ),
+                  style: TextStyle(color: Colors.white70, fontSize: 13),
                 ),
               ],
             ),
@@ -131,16 +135,24 @@ class AppDrawer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [bg.withOpacity(0.9), bg.withOpacity(0.6)],
+            colors: [
+              Colors.grey[700]!.withOpacity(0.9),
+              Colors.grey[800]!.withOpacity(0.6),
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(12),
         ),
         child: ListTile(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           leading: Icon(icon, color: Colors.white),
-          title: Text(title, style: const TextStyle(fontSize: 15, color: Colors.white)),
+          title: Text(
+            title,
+            style: const TextStyle(fontSize: 15, color: Colors.white),
+          ),
           onTap: onTap,
         ),
       ),
@@ -153,9 +165,12 @@ class AppDrawer extends StatelessWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
-             decoration: BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [bg.withOpacity(0.9), bg.withOpacity(0.6)],
+            colors: [
+              Colors.grey[700]!.withOpacity(0.9),
+              Colors.grey[800]!.withOpacity(0.6),
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

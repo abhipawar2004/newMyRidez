@@ -8,7 +8,7 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget { 
   const MyApp({super.key});
 
   @override
@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
           title: 'My Ride App',
           theme: ThemeData(
             primaryColor: primary,
-
           ),
-        
           home: const PhoneSignInScreen(),
           debugShowCheckedModeBanner: false,
         );
