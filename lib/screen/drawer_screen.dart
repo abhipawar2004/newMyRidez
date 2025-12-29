@@ -8,11 +8,20 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.horizontal(right: Radius.circular(20)),
       ),
-      child: Column(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black],
+          ),
+          borderRadius: const BorderRadius.horizontal(right: Radius.circular(20)),
+        ),
+        child: Column(
         children: [
           _buildHeader(),
 
@@ -36,9 +45,7 @@ class AppDrawer extends StatelessWidget {
                   Navigator.pop(context);
                   Get.to(() => const ProfileScreen());
                 }),
-
                 const SizedBox(height: 10),
-
                 _sectionTitle("Legal & Others"),
                 _drawerTile(Icons.settings_outlined, "Settings", () {}),
                 _drawerTile(
@@ -51,27 +58,27 @@ class AppDrawer extends StatelessWidget {
                   "Terms & Conditions",
                   () {},
                 ),
-
                 const SizedBox(height: 10),
-
                 _logoutTile(),
               ],
             ),
           ),
         ],
       ),
+      ),
     );
   }
-
   // -------------------- UI Components --------------------
-
   Widget _buildHeader() {
     return DrawerHeader(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.grey[800]!, Colors.grey[900]!],
+          colors: [
+            const Color.fromARGB(255, 11, 2, 17).withOpacity(0.5),
+            const Color.fromARGB(255, 255, 0, 0).withOpacity(0.3),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -134,15 +141,12 @@ class AppDrawer extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.grey[700]!.withOpacity(0.9),
-              Colors.grey[800]!.withOpacity(0.6),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.2),
+            width: 1,
+          ),
         ),
         child: ListTile(
           shape: RoundedRectangleBorder(
@@ -166,15 +170,12 @@ class AppDrawer extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.grey[700]!.withOpacity(0.9),
-              Colors.grey[800]!.withOpacity(0.6),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.2),
+            width: 1,
+          ),
         ),
         child: ListTile(
           leading: const Icon(Icons.logout, color: Colors.white),
