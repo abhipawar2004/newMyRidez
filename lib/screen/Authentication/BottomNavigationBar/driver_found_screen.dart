@@ -46,6 +46,9 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
     'phoneNumber': '+91 98765 43210',
   };
 
+  // Ride OTP for verification
+  final String _rideOTP = '4582';
+
   final String _mapStyle = '''[
     {
       "featureType": "poi",
@@ -304,6 +307,72 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                   ),
 
                   SizedBox(height: 20.h),
+
+                  // OTP Display Card
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          const Color.fromARGB(255, 198, 99, 255).withOpacity(0.3),
+                          const Color.fromARGB(255, 46, 0, 125).withOpacity(0.2),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(color: const Color.fromARGB(255, 255, 210, 77), width: .5),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Your Ride OTP',
+                              style: GoogleFonts.roboto(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 12.h),
+                        // OTP Number Display
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24.w,
+                            vertical: 12.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: Text(
+                            _rideOTP,
+                            style: GoogleFonts.roboto(
+                              fontSize: 32.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              letterSpacing: 8.w,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                          'Share this OTP with your driver',
+                          style: GoogleFonts.roboto(
+                            fontSize: 12.sp,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 16.h),
 
                   // Driver info card
                   Container(

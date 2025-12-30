@@ -40,7 +40,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
   Set<Marker> _markers = {};
   Set<Polyline> _polylines = {};
   final Set<Circle> _circles = {};
-  
+
   int? _selectedVehicleIndex;
   bool _isSearchingDriver = false;
   late AnimationController _animationController;
@@ -394,21 +394,38 @@ class _RideBookingScreenState extends State<RideBookingScreen>
 
   Widget _buildSearchingContent() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 30.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Loading indicator
+          SizedBox(
+            width: 60.w,
+            height: 60.h,
+            child: CircularProgressIndicator(
+              strokeWidth: 4,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+          ),
+
+          SizedBox(height: 24.h),
+
           // Searching text
           Text(
             'Searching for drivers...',
             style: GoogleFonts.roboto(
-              fontSize: 22.sp,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: 8.h),
+
+          Text(
+            'Please wait',
+            style: GoogleFonts.roboto(fontSize: 14.sp, color: Colors.white70),
+          ),
         ],
       ),
     );
