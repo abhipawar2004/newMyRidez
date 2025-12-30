@@ -42,7 +42,7 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black],
+            colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black,Colors.black],
           ),
         ),
         child: SafeArea(

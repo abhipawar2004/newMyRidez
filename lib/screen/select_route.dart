@@ -49,6 +49,46 @@ class _RouteScreenState extends State<RouteScreen> {
     super.dispose();
   }
 
+  Widget _buildAddressItem({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+  }) {
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 0),
+      leading: Icon(
+        icon,
+        color: Colors.black87,
+        size: 24.sp,
+      ),
+      title: Text(
+        title,
+        overflow: TextOverflow.ellipsis,
+        style: GoogleFonts.roboto(
+          fontSize: 15.sp,
+          fontWeight: FontWeight.w500,
+          color: Colors.black87,
+
+        ),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: GoogleFonts.roboto(
+          fontSize: 13.sp,
+          color: Colors.grey[600],
+        ),
+      ),
+      onTap: () {
+        // Handle address selection
+        if (_pickupFocusNode.hasFocus) {
+          _pickupController.text = title;
+        } else if (_dropoffFocusNode.hasFocus) {
+          _dropoffController.text = title;
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +196,7 @@ class _RouteScreenState extends State<RouteScreen> {
 
                         IconButton(
                           icon: Icon(
-                            Icons.add,
+                            Icons.my_location,
                             color: Colors.white,
                             size: 24.sp,
                           ),
@@ -236,28 +276,55 @@ class _RouteScreenState extends State<RouteScreen> {
               ),
             ),
           ),
-          // Current location option
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8.0,
-              horizontal: 12.0,
-            ),
-            child: ListTile(
-              leading: Icon(
-                Icons.my_location,
-                color: Colors.black87,
-                size: 24.sp,
-              ),
-              title: Text(
-                'Current location',
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
-              ),
-              onTap: () {
-                _pickupController.text = 'Current location';
-              },
+          // Address suggestions
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              children: [
+                _buildAddressItem(
+                  icon: Icons.location_on,
+                  title: 'Sector 17, Chandigarh',
+                  subtitle: 'Shopping area, Chandigarh, Punjab',
+                ),
+                Divider(height: 1, color: Colors.grey[300]),
+                _buildAddressItem(
+                  icon: Icons.location_on,
+                  title: 'Phase 7, Mohali',
+                  subtitle: 'Industrial Area, Mohali, Punjab',
+                ),
+                Divider(height: 1, color: Colors.grey[300]),
+                _buildAddressItem(
+                  icon: Icons.location_on,
+                  title: 'Elante Mall',
+                  subtitle: 'Industrial Area Phase 1, Chandigarh',
+                ),
+                Divider(height: 1, color: Colors.grey[300]),
+                _buildAddressItem(
+                  icon: Icons.location_on,
+                  title: 'Chandigarh Railway Station',
+                  subtitle: 'Station Road, Chandigarh',
+                ),
+                Divider(height: 1, color: Colors.grey[300]),
+                _buildAddressItem(
+                  icon: Icons.location_on,
+                  title: 'Sukhna Lake',
+                  subtitle: 'Sector 1, Chandigarh',
+                ),
+                Divider(height: 1, color: Colors.grey[300]),
+                _buildAddressItem(
+                  icon: Icons.location_on,
+                  title: 'PGI Hospital',
+                  subtitle: 'Sector 12, Chandigarh',
+                ),
+                Divider(height: 1, color: Colors.grey[300]),
+                _buildAddressItem(
+                  icon: Icons.location_on,
+                  title: 'Panjab University',
+                  subtitle: 'Sector 14, Chandigarh',
+                ),
+              ],
             ),
           ),
-          const Spacer(),
           // Find Driver button
           Padding(
             padding: EdgeInsets.all(16.0.w),
