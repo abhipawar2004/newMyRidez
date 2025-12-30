@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:get/get.dart';
 import '../../../utils/constants.dart';
+import 'driver_found_screen.dart';
 
 class RideBookingScreen extends StatefulWidget {
   final LatLng pickupLocation;
@@ -32,11 +34,13 @@ class _RideBookingScreenState extends State<RideBookingScreen>
     'Wallet',
     'Net-Banking',
   ];
+
   String _selectedPaymentMethod = 'Cash';
 
   Set<Marker> _markers = {};
   Set<Polyline> _polylines = {};
   final Set<Circle> _circles = {};
+  
   int? _selectedVehicleIndex;
   bool _isSearchingDriver = false;
   late AnimationController _animationController;
@@ -285,6 +289,24 @@ class _RideBookingScreenState extends State<RideBookingScreen>
   void _showDriverSearchingDialog() {
     // Start the ripple animation
     _animationController.repeat();
+
+    // After 3 seconds, navigate to driver found screen
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        _animationController.stop();
+        Get.off(
+          () => DriverFoundScreen(
+            pickupLocation: widget.pickupLocation,
+            dropoffLocation: widget.dropoffLocation,
+            pickupAddress: widget.pickupAddress,
+            dropoffAddress: widget.dropoffAddress,
+            vehicleName: _vehicles[_selectedVehicleIndex!]['name'],
+            vehiclePrice: _vehicles[_selectedVehicleIndex!]['price'],
+            paymentMethod: _selectedPaymentMethod,
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -342,7 +364,10 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.grey[900]!, Colors.black],
+                    colors: [
+                      const Color.fromARGB(255, 96, 10, 166),
+                      Colors.black,
+                    ],
                   ),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),

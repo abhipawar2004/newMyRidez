@@ -56,11 +56,7 @@ class _RouteScreenState extends State<RouteScreen> {
   }) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 0),
-      leading: Icon(
-        icon,
-        color: Colors.black87,
-        size: 24.sp,
-      ),
+      leading: Icon(icon, color: Colors.black87, size: 24.sp),
       title: Text(
         title,
         overflow: TextOverflow.ellipsis,
@@ -68,15 +64,11 @@ class _RouteScreenState extends State<RouteScreen> {
           fontSize: 15.sp,
           fontWeight: FontWeight.w500,
           color: Colors.black87,
-
         ),
       ),
       subtitle: Text(
         subtitle,
-        style: GoogleFonts.roboto(
-          fontSize: 13.sp,
-          color: Colors.grey[600],
-        ),
+        style: GoogleFonts.roboto(fontSize: 13.sp, color: Colors.grey[600]),
       ),
       onTap: () {
         // Handle address selection
@@ -93,7 +85,7 @@ class _RouteScreenState extends State<RouteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -125,7 +117,7 @@ class _RouteScreenState extends State<RouteScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [const Color.fromARGB(255, 124, 18, 245)!, Colors.black],
+                colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black],
               ),
               boxShadow: [
                 BoxShadow(

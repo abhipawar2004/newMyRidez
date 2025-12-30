@@ -104,7 +104,14 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
             child: Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                color: Colors.white,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    const Color.fromARGB(255, 96, 10, 166),
+                    Colors.black,
+                  ],
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -120,8 +127,9 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                   Container(
                     padding: EdgeInsets.all(12.w),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade50,
+                      color: Colors.white.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(color: Colors.white.withOpacity(0.3)),
                     ),
                     child: Column(
                       children: [
@@ -129,14 +137,17 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                           children: [
                             Icon(
                               Icons.location_on,
-                              color: Colors.black,
+                              color: Colors.white,
                               size: 20.sp,
                             ),
                             SizedBox(width: 8.w),
                             Expanded(
                               child: Text(
                                 'Lat: ${_currentDropoffPosition.latitude.toStringAsFixed(6)}',
-                                style: GoogleFonts.roboto(fontSize: 12.sp),
+                                style: GoogleFonts.roboto(
+                                  fontSize: 12.sp,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],
@@ -146,14 +157,17 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                           children: [
                             Icon(
                               Icons.location_on,
-                              color: Colors.black,
+                              color: Colors.white,
                               size: 20.sp,
                             ),
                             SizedBox(width: 8.w),
                             Expanded(
                               child: Text(
                                 'Lng: ${_currentDropoffPosition.longitude.toStringAsFixed(6)}',
-                                style: GoogleFonts.roboto(fontSize: 12.sp),
+                                style: GoogleFonts.roboto(
+                                  fontSize: 12.sp,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],
@@ -192,7 +206,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
+                        backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.r),
                         ),
@@ -202,7 +216,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                         style: GoogleFonts.roboto(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                     ),

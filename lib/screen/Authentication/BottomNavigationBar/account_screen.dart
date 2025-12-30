@@ -145,7 +145,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-
             // Settings Section
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
