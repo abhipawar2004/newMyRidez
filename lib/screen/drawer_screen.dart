@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'Authentication/BottomNavigationBar/account_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ride_app/screen/address_screen.dart';
+import 'Authentication/BottomNavigationBar/profile_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -23,8 +25,7 @@ class AppDrawer extends StatelessWidget {
         ),
         child: Column(
         children: [
-          _buildHeader(),
-
+          _buildHeader(context),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -41,13 +42,12 @@ class AppDrawer extends StatelessWidget {
                 _drawerTile(Icons.credit_card_outlined, "Payment Methods", () {
                   Navigator.pop(context);
                 }),
-                _drawerTile(Icons.person_outline, "Account", () {
+                _drawerTile(Icons.person_outline, "Address", () {
                   Navigator.pop(context);
-                  Get.to(() => const ProfileScreen());
+                  Get.to(() => const AddressScreen());
                 }),
                 const SizedBox(height: 10),
                 _sectionTitle("Legal & Others"),
-                _drawerTile(Icons.settings_outlined, "Settings", () {}),
                 _drawerTile(
                   Icons.privacy_tip_outlined,
                   "Privacy Policy",
@@ -69,7 +69,7 @@ class AppDrawer extends StatelessWidget {
     );
   }
   // -------------------- UI Components --------------------
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return DrawerHeader(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
@@ -83,36 +83,43 @@ class AppDrawer extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 32,
-              backgroundColor: Colors.white,
-              child: Icon(Icons.person, size: 40, color: Colors.black),
-            ),
-            const SizedBox(width: 15),
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Abhishek Pawar',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
+      child: InkWell(
+        borderRadius: BorderRadius.zero,
+        onTap: () {
+          Navigator.pop(context);
+          Get.to(() => const ProfileScreen());
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 32,
+                backgroundColor: Colors.white,
+                child: Icon(Icons.person, size: 40, color: Colors.black),
+              ),
+              const SizedBox(width: 15),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Abhishek Pawar',
+                    style: GoogleFonts.rosario(
+                      color: Colors.white,
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  'View Profile',
-                  style: TextStyle(color: Colors.white70, fontSize: 13),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(height: 5),
+                  Text(
+                    'View Profile',
+                    style: GoogleFonts.rosario(color: Colors.white70, fontSize: 13),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -123,7 +130,7 @@ class AppDrawer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Text(
         title.toUpperCase(),
-        style: TextStyle(
+        style: GoogleFonts.rosario(
           fontSize: 11,
           color: Colors.white,
           fontWeight: FontWeight.bold,
