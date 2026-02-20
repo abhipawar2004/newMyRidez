@@ -53,7 +53,6 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 50.h),
-
                 /// TITLE
                 Text(
                   "Verify your number",
