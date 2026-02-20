@@ -11,12 +11,13 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class User {
+  
   final String username;
   final String name;
   final String email;
   final String phone;
   final String address;
-  
+
   User({required this.username, required this.name, required this.email, required this.phone, required this.address});
 }
 
