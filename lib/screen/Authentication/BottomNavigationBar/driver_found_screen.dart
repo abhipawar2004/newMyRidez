@@ -317,12 +317,25 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          const Color.fromARGB(255, 198, 99, 255).withOpacity(0.3),
-                          const Color.fromARGB(255, 46, 0, 125).withOpacity(0.2),
+                          const Color.fromARGB(
+                            255,
+                            198,
+                            99,
+                            255,
+                          ).withOpacity(0.3),
+                          const Color.fromARGB(
+                            255,
+                            46,
+                            0,
+                            125,
+                          ).withOpacity(0.2),
                         ],
                       ),
                       borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: const Color.fromARGB(255, 255, 210, 77), width: .5),
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 255, 210, 77),
+                        width: .5,
+                      ),
                     ),
                     child: Column(
                       children: [

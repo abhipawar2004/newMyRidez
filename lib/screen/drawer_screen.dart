@@ -21,53 +21,60 @@ class AppDrawer extends StatelessWidget {
             end: Alignment.bottomCenter,
             colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black],
           ),
-          borderRadius: const BorderRadius.horizontal(right: Radius.circular(20)),
+          borderRadius: const BorderRadius.horizontal(
+            right: Radius.circular(20),
+          ),
         ),
         child: Column(
-        children: [
-          _buildHeader(context),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              children: [
-                const SizedBox(height: 10),
+          children: [
+            _buildHeader(context),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                children: [
+                  const SizedBox(height: 10),
 
-                _sectionTitle("Menu"),
-                _drawerTile(Icons.home_outlined, "Home", () {
-                  Navigator.pop(context);
-                }),
-                _drawerTile(Icons.history_outlined, "My Rides History", () {
-                  Navigator.pop(context);
-                }),
-                _drawerTile(Icons.credit_card_outlined, "Payment Methods", () {
-                  Navigator.pop(context);
-                }),
-                _drawerTile(Icons.person_outline, "Address", () {
-                  Navigator.pop(context);
-                  Get.to(() => const AddressScreen());
-                }),
-                const SizedBox(height: 10),
-                _sectionTitle("Legal & Others"),
-                _drawerTile(
-                  Icons.privacy_tip_outlined,
-                  "Privacy Policy",
-                  () {},
-                ),
-                _drawerTile(
-                  Icons.description_outlined,
-                  "Terms & Conditions",
-                  () {},
-                ),
-                const SizedBox(height: 10),
-                _logoutTile(),
-              ],
+                  _sectionTitle("Menu"),
+                  _drawerTile(Icons.home_outlined, "Home", () {
+                    Navigator.pop(context);
+                  }),
+                  _drawerTile(Icons.history_outlined, "My Rides History", () {
+                    Navigator.pop(context);
+                  }),
+                  _drawerTile(
+                    Icons.credit_card_outlined,
+                    "Payment Methods",
+                    () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  _drawerTile(Icons.person_outline, "Address", () {
+                    Navigator.pop(context);
+                    Get.to(() => const AddressScreen());
+                  }),
+                  const SizedBox(height: 10),
+                  _sectionTitle("Legal & Others"),
+                  _drawerTile(
+                    Icons.privacy_tip_outlined,
+                    "Privacy Policy",
+                    () {},
+                  ),
+                  _drawerTile(
+                    Icons.description_outlined,
+                    "Terms & Conditions",
+                    () {},
+                  ),
+                  const SizedBox(height: 10),
+                  _logoutTile(),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
   }
+
   // -------------------- UI Components --------------------
   Widget _buildHeader(BuildContext context) {
     return DrawerHeader(
@@ -114,7 +121,10 @@ class AppDrawer extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     'View Profile',
-                    style: GoogleFonts.rosario(color: Colors.white70, fontSize: 13),
+                    style: GoogleFonts.rosario(
+                      color: Colors.white70,
+                      fontSize: 13,
+                    ),
                   ),
                 ],
               ),
@@ -150,10 +160,7 @@ class AppDrawer extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2),
-            width: 1,
-          ),
+          border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
         ),
         child: ListTile(
           shape: RoundedRectangleBorder(
@@ -179,10 +186,7 @@ class AppDrawer extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2),
-            width: 1,
-          ),
+          border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
         ),
         child: ListTile(
           leading: const Icon(Icons.logout, color: Colors.white),

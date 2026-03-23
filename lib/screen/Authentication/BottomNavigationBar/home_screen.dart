@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ride_app/screen/select_route.dart';
-import 'package:ride_app/utils/constants.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 import '../../drawer_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: null,
       drawer: const AppDrawer(),
-      backgroundColor: bg,
+      backgroundColor: AppColors.scaffoldBackground,
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Stack(
@@ -188,16 +188,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Builder(
                     builder: (context) => Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.cardBackground,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: const Color.fromARGB(
-                              255,
-                              255,
-                              255,
-                              255,
-                            ).withOpacity(0.2),
+                            color: AppColors.shadow,
                             spreadRadius: 1,
                             blurRadius: 6,
                             offset: const Offset(0, 2),
@@ -205,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       child: IconButton(
-                        icon: const Icon(Icons.menu, color: Colors.black),
+                        icon: Icon(Icons.menu, color: AppColors.textPrimary),
                         onPressed: () => Scaffold.of(context).openDrawer(),
                       ),
                     ),
@@ -231,19 +226,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: screenHeight * _sheetHeight,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [const Color.fromARGB(255, 96, 10, 166)!, Colors.black],
-                        ),
+                        gradient: AppColors.primaryGradient,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                         ),
-                        border: Border.all(color: Colors.white, width: 1),
+                        border: Border.all(color: AppColors.border, width: 1),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black12,
+                            color: AppColors.shadow,
                             blurRadius: 10,
                             spreadRadius: 5,
                           ),
@@ -262,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 4,
                                 margin: const EdgeInsets.only(bottom: 12),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade300,
+                                  color: AppColors.textDisabled,
                                   borderRadius: BorderRadius.circular(2),
                                 ),
                               ),
@@ -277,23 +268,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                   horizontal: 15,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: AppColors.cardBackground,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.search,
                                       size: 24,
-                                      color: Colors.black,
+                                      color: AppColors.textPrimary,
                                     ),
                                     const SizedBox(width: 10),
-                                    const Text(
+                                    Text(
                                       "Where to?",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: AppColors.textPrimary,
                                       ),
                                     ),
                                   ],
@@ -303,12 +294,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
                             const SizedBox(height: 15),
 
-                            const Text(
+                            Text(
                               "Recent locations",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: AppColors.textPrimary,
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -333,18 +324,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _recentTile(String title, String subtitle) {
     return ListTile(
-      leading: const Icon(Icons.access_time, color: Colors.white70),
+      leading: Icon(Icons.access_time, color: AppColors.textSecondary),
       title: Text(
         title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(color: AppColors.textPrimary),
       ),
       subtitle: Text(
         subtitle,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: const TextStyle(color: Colors.white70),
+        style: TextStyle(color: AppColors.textSecondary),
       ),
       dense: true,
     );

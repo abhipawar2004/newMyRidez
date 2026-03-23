@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ride_app/utils/constants.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -11,26 +11,38 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class User {
-  
   final String username;
   final String name;
   final String email;
   final String phone;
   final String address;
 
-  User({required this.username, required this.name, required this.email, required this.phone, required this.address});
+  User({
+    required this.username,
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.address,
+  });
 }
 
 Widget _infoTile(IconData icon, String label, String value) {
   return ListTile(
-    leading: Icon(icon, color: Colors.white70),
+    leading: Icon(icon, color: AppColors.textSecondary),
     title: Text(
       label,
-      style: GoogleFonts.roboto(color: Colors.white70, fontSize: 12.sp),
+      style: GoogleFonts.poppins(
+        color: AppColors.textSecondary,
+        fontSize: 12.sp,
+      ),
     ),
     subtitle: Text(
       value.isNotEmpty ? value : '-',
-      style: GoogleFonts.roboto(color: Colors.white, fontSize: 14.sp, fontWeight: FontWeight.w600),
+      style: GoogleFonts.poppins(
+        color: AppColors.textPrimary,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
+      ),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
     ),
@@ -62,23 +74,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bg,
+      backgroundColor: AppColors.scaffoldBackground,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Profile', style: GoogleFonts.roboto(color: Colors.white, fontWeight: FontWeight.w600)),
+        title: Text(
+          'Profile',
+          style: GoogleFonts.poppins(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       body: Container(
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color.fromARGB(255, 96, 10, 166), Colors.black, Colors.black],
+            colors: [
+              AppColors.primary,
+              AppColors.primaryDark,
+              AppColors.scaffoldBackground,
+            ],
           ),
         ),
         child: SafeArea(
@@ -97,11 +119,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             CircleAvatar(
                               radius: 40.r,
-                              backgroundColor: Colors.white10,
+                              backgroundColor: AppColors.cardBackground,
                               child: Icon(
                                 Icons.person,
                                 size: 45.sp,
-                                color: Colors.white,
+                                color: AppColors.primary,
                               ),
                             ),
                             Positioned(
@@ -110,13 +132,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Container(
                                 padding: EdgeInsets.all(6.w),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: AppColors.primary,
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                    color: AppColors.cardBackground,
+                                    width: 2,
+                                  ),
                                 ),
                                 child: Icon(
                                   Icons.camera_alt,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   size: 16.sp,
                                 ),
                               ),
@@ -126,10 +151,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(height: 12.h),
                         Text(
                           user?.name ?? 'Loading...',
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.poppins(
                             fontSize: 22.sp,
                             fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                            color: AppColors.textPrimary,
                           ),
                         ),
                         SizedBox(height: 8.h),
@@ -137,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 18.w),
                           child: Card(
-                            color: Colors.white10,
+                            color: AppColors.cardBackground,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.r),
                             ),
@@ -145,15 +170,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Column(
                                 children: [
-                                  _infoTile(Icons.person_outline, 'Username', user?.username ?? ''),
-                                  Divider(color: Colors.white24, height: 1.h),
-                                  _infoTile(Icons.badge, 'Full name', user?.name ?? ''),
-                                  Divider(color: Colors.white24, height: 1.h),
-                                  _infoTile(Icons.email_outlined, 'Email', user?.email ?? ''),
-                                  Divider(color: Colors.white24, height: 1.h),
-                                  _infoTile(Icons.phone_outlined, 'Phone', user?.phone ?? ''),
-                                  Divider(color: Colors.white24, height: 1.h),
-                                  _infoTile(Icons.location_on_outlined, 'Address', user?.address ?? ''),
+                                  _infoTile(
+                                    Icons.person_outline,
+                                    'Username',
+                                    user?.username ?? '',
+                                  ),
+                                  Divider(
+                                    color: AppColors.divider,
+                                    height: 1.h,
+                                  ),
+                                  _infoTile(
+                                    Icons.badge,
+                                    'Full name',
+                                    user?.name ?? '',
+                                  ),
+                                  Divider(
+                                    color: AppColors.divider,
+                                    height: 1.h,
+                                  ),
+                                  _infoTile(
+                                    Icons.email_outlined,
+                                    'Email',
+                                    user?.email ?? '',
+                                  ),
+                                  Divider(
+                                    color: AppColors.divider,
+                                    height: 1.h,
+                                  ),
+                                  _infoTile(
+                                    Icons.phone_outlined,
+                                    'Phone',
+                                    user?.phone ?? '',
+                                  ),
+                                  Divider(
+                                    color: AppColors.divider,
+                                    height: 1.h,
+                                  ),
+                                  _infoTile(
+                                    Icons.location_on_outlined,
+                                    'Address',
+                                    user?.address ?? '',
+                                  ),
                                 ],
                               ),
                             ),
@@ -167,11 +224,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ),
-    ), 
-    ); 
+      ),
+    );
   }
- 
-
-
-
 }

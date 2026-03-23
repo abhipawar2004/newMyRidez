@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
-import '../../../utils/constants.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 import 'driver_found_screen.dart';
 
 class RideBookingScreen extends StatefulWidget {
@@ -185,9 +185,9 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             circleId: CircleId('ripple_$i'),
             center: widget.pickupLocation,
             radius: radius,
-            strokeColor: bg.withOpacity(opacity * 0.6),
+            strokeColor: AppColors.primary.withOpacity(opacity * 0.6),
             strokeWidth: 3,
-            fillColor: bg.withOpacity(opacity * 0.1),
+            fillColor: AppColors.primary.withOpacity(opacity * 0.1),
           ),
         );
       }
@@ -199,9 +199,9 @@ class _RideBookingScreenState extends State<RideBookingScreen>
           circleId: const CircleId('pulse_center'),
           center: widget.pickupLocation,
           radius: 15, // small radius in meters
-          strokeColor: bg.withOpacity(pulseOpacity),
+          strokeColor: AppColors.primary.withOpacity(pulseOpacity),
           strokeWidth: 4,
-          fillColor: bg.withOpacity(pulseOpacity * 0.5),
+          fillColor: AppColors.primary.withOpacity(pulseOpacity * 0.5),
         ),
       );
     });
@@ -232,7 +232,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
       Polyline(
         polylineId: const PolylineId('route'),
         points: [widget.pickupLocation, widget.dropoffLocation],
-        color: Colors.white,
+        color: AppColors.mapRoute,
         width: 8,
         patterns: [PatternItem.dash(20), PatternItem.gap(10)],
       ),
@@ -336,18 +336,22 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             left: 16.w,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.cardBackground,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: AppColors.shadow,
                     blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),
                 ],
               ),
               child: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.black, size: 24.sp),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.textPrimary,
+                  size: 24.sp,
+                ),
                 onPressed: () => Navigator.pop(context),
               ),
             ),
@@ -361,21 +365,14 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             builder: (context, scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      const Color.fromARGB(255, 96, 10, 166),
-                      Colors.black,
-                    ],
-                  ),
+                  gradient: AppColors.primaryGradient,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),
                     topRight: Radius.circular(20.r),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: AppColors.shadow,
                       blurRadius: 10,
                       offset: const Offset(0, -2),
                     ),
@@ -413,10 +410,10 @@ class _RideBookingScreenState extends State<RideBookingScreen>
           // Searching text
           Text(
             'Searching for drivers...',
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.poppins(
               fontSize: 20.sp,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: AppColors.textPrimary,
             ),
           ),
 
@@ -424,7 +421,10 @@ class _RideBookingScreenState extends State<RideBookingScreen>
 
           Text(
             'Please wait',
-            style: GoogleFonts.roboto(fontSize: 14.sp, color: Colors.white70),
+            style: GoogleFonts.poppins(
+              fontSize: 14.sp,
+              color: AppColors.textSecondary,
+            ),
           ),
         ],
       ),
@@ -440,7 +440,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
           height: 4.h,
           margin: EdgeInsets.symmetric(vertical: 12.h),
           decoration: BoxDecoration(
-            color: Colors.white70,
+            color: AppColors.textDisabled,
             borderRadius: BorderRadius.circular(2.r),
           ),
         ),
@@ -453,13 +453,17 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             children: [
               Text(
                 'Choose a ride',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.poppins(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w700,
-                  color: Colors.white,
+                  color: AppColors.textPrimary,
                 ),
               ),
-              Icon(Icons.info_outline, size: 20.sp, color: Colors.white),
+              Icon(
+                Icons.info_outline,
+                size: 20.sp,
+                color: AppColors.textPrimary,
+              ),
             ],
           ),
         ),
@@ -487,10 +491,10 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                   padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? Colors.grey.withOpacity(0.3)
-                        : Colors.grey.withOpacity(0.1),
+                        ? AppColors.cardBackground
+                        : AppColors.cardBackground.withOpacity(0.5),
                     border: Border.all(
-                      color: isSelected ? Colors.white : Colors.grey,
+                      color: isSelected ? AppColors.primary : AppColors.border,
                       width: isSelected ? 2 : 1,
                     ),
                     borderRadius: BorderRadius.circular(12.r),
@@ -501,13 +505,13 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                       Container(
                         padding: EdgeInsets.all(10.w),
                         decoration: BoxDecoration(
-                          color: Colors.white24,
+                          color: AppColors.primary.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Icon(
                           vehicle['icon'],
                           size: 32.sp,
-                          color: Colors.white,
+                          color: AppColors.primary,
                         ),
                       ),
 
@@ -522,7 +526,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                               children: [
                                 Text(
                                   vehicle['name'],
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.poppins(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
@@ -536,7 +540,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                                 ),
                                 Text(
                                   '${vehicle['passengers']}',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.poppins(
                                     fontSize: 12.sp,
                                     color: Colors.white70,
                                   ),
@@ -546,7 +550,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                             SizedBox(height: 4.h),
                             Text(
                               vehicle['type'],
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.poppins(
                                 fontSize: 12.sp,
                                 color: Colors.white70,
                               ),
@@ -554,7 +558,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                             SizedBox(height: 4.h),
                             Text(
                               '${vehicle['eta']} away',
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.poppins(
                                 fontSize: 12.sp,
                                 color: Colors.white,
                               ),
@@ -566,7 +570,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                       // Price
                       Text(
                         vehicle['price'],
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.poppins(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -584,10 +588,10 @@ class _RideBookingScreenState extends State<RideBookingScreen>
         Container(
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: AppColors.cardBackground,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: AppColors.shadow,
                 blurRadius: 4,
                 offset: const Offset(0, -2),
               ),
@@ -599,7 +603,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 1.h),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.background,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: DropdownButtonHideUnderline(
@@ -607,23 +611,23 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                     value: _selectedPaymentMethod,
                     icon: Icon(
                       Icons.keyboard_arrow_down,
-                      color: Colors.black,
+                      color: AppColors.textPrimary,
                       size: 20.sp,
                     ),
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.poppins(
                       fontSize: 13.sp,
-                      color: Colors.black,
+                      color: AppColors.textPrimary,
                     ),
-                    dropdownColor: Colors.white,
+                    dropdownColor: AppColors.cardBackground,
                     items: _paymentMethods.map((method) {
                       return DropdownMenuItem<String>(
                         value: method,
                         child: Text(
                           method,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.poppins(
                             fontSize: 12.sp,
-                            color: Colors.black,
+                            color: AppColors.textPrimary,
                           ),
                         ),
                       );
@@ -651,8 +655,8 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                           },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _selectedVehicleIndex == null
-                          ? Colors.grey.shade300
-                          : Colors.white,
+                          ? AppColors.textDisabled
+                          : AppColors.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.r),
                       ),
@@ -662,12 +666,10 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                       _selectedVehicleIndex == null
                           ? 'Select a vehicle'
                           : 'Confirm ${_vehicles[_selectedVehicleIndex!]['name']}',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.poppins(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
-                        color: _selectedVehicleIndex == null
-                            ? Colors.grey
-                            : Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ),

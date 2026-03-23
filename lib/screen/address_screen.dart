@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ride_app/utils/constants.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 
 class AddressScreen extends StatefulWidget {
   const AddressScreen({super.key});
@@ -10,9 +10,7 @@ class AddressScreen extends StatefulWidget {
 }
 
 class _AddressScreenState extends State<AddressScreen> {
-  final List<String> _addresses = [
-    'Home · 221B Baker Street, London',
-  ];
+  final List<String> _addresses = ['Home · 221B Baker Street, London'];
 
   final TextEditingController _controller = TextEditingController();
 
@@ -38,7 +36,7 @@ class _AddressScreenState extends State<AddressScreen> {
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: cdbk,
+              color: AppColors.cardBackground,
               borderRadius: BorderRadius.circular(12),
             ),
             padding: const EdgeInsets.all(12),
@@ -48,20 +46,26 @@ class _AddressScreenState extends State<AddressScreen> {
               children: [
                 Text(
                   index == null ? 'Add Address' : 'Edit Address',
-                  style: GoogleFonts.roboto(
-                      color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                  style: GoogleFonts.poppins(
+                    color: AppColors.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 TextField(
                   controller: _controller,
-                  style: const TextStyle(color: Colors.white),
-                  cursorColor: Colors.white,
+                  style: TextStyle(color: AppColors.textPrimary),
+                  cursorColor: AppColors.primary,
                   decoration: InputDecoration(
                     hintText: 'Enter address',
-                    hintStyle: TextStyle(color: Colors.white54),
+                    hintStyle: TextStyle(color: AppColors.textHint),
                     filled: true,
-                    fillColor: Colors.white10,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                    fillColor: AppColors.background,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                   minLines: 1,
                   maxLines: 3,
@@ -69,8 +73,8 @@ class _AddressScreenState extends State<AddressScreen> {
                 const SizedBox(height: 12),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.black,
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
                   ),
                   onPressed: () {
                     final text = _controller.text.trim();
@@ -99,29 +103,48 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bg,
+      backgroundColor: AppColors.scaffoldBackground,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Addresses', style: GoogleFonts.roboto(color: Colors.white, fontWeight: FontWeight.w600)),
+        title: Text(
+          'Addresses',
+          style: GoogleFonts.poppins(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       body: _addresses.isEmpty
           ? Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.location_off, size: 56, color: Colors.white54),
+                  Icon(
+                    Icons.location_off,
+                    size: 56,
+                    color: AppColors.textDisabled,
+                  ),
                   const SizedBox(height: 8),
-                  Text('No addresses yet', style: GoogleFonts.roboto(color: Colors.white54)),
+                  Text(
+                    'No addresses yet',
+                    style: GoogleFonts.poppins(color: AppColors.textSecondary),
+                  ),
                   const SizedBox(height: 8),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                    ),
                     onPressed: () => _showAddEditSheet(),
-                    child: Text('Add Address', style: GoogleFonts.roboto(color: Colors.black)),
+                    child: Text(
+                      'Add Address',
+                      style: GoogleFonts.poppins(color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -131,13 +154,21 @@ class _AddressScreenState extends State<AddressScreen> {
               itemBuilder: (context, index) {
                 final addr = _addresses[index];
                 return Card(
-                  color: Colors.white10,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  color: AppColors.cardBackground,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: ListTile(
-                    leading: const Icon(Icons.location_on_outlined, color: Colors.white),
-                    title: Text(addr, style: const TextStyle(color: Colors.white)),
+                    leading: Icon(
+                      Icons.location_on_outlined,
+                      color: AppColors.primary,
+                    ),
+                    title: Text(
+                      addr,
+                      style: TextStyle(color: AppColors.textPrimary),
+                    ),
                     trailing: PopupMenuButton<String>(
-                      color: Colors.white,
+                      color: AppColors.cardBackground,
                       onSelected: (value) {
                         if (value == 'edit') {
                           _showAddEditSheet(index: index);
@@ -145,9 +176,21 @@ class _AddressScreenState extends State<AddressScreen> {
                           setState(() => _addresses.removeAt(index));
                         }
                       },
-                      itemBuilder: (context) => const [
-                        PopupMenuItem(value: 'edit', child: Text('Edit')),
-                        PopupMenuItem(value: 'delete', child: Text('Delete')),
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          value: 'edit',
+                          child: Text(
+                            'Edit',
+                            style: TextStyle(color: AppColors.textPrimary),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: 'delete',
+                          child: Text(
+                            'Delete',
+                            style: TextStyle(color: AppColors.error),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -158,8 +201,8 @@ class _AddressScreenState extends State<AddressScreen> {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddEditSheet(),
-        backgroundColor: Colors.white,
-        child: const Icon(Icons.add, color: Colors.black),
+        backgroundColor: AppColors.primary,
+        child: const Icon(Icons.add, color: Colors.white),
         tooltip: 'Add Address',
       ),
     );

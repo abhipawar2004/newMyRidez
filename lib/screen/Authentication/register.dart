@@ -42,206 +42,215 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black,Colors.black],
+            colors: [
+              const Color.fromARGB(255, 96, 10, 166),
+              Colors.black,
+              Colors.black,
+            ],
           ),
         ),
         child: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 50.h),
-                /// TITLE
-                Text(
-                  "Verify your number",
-                  style: TextStyle(
-                    fontSize: 23.sp,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  "Enter your mobile number to continue",
-                  style: TextStyle(fontSize: 11.sp, color: Colors.white54),
-                ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 50.h),
 
-                SizedBox(height: 40.h),
+                  /// TITLE
+                  Text(
+                    "Verify your number",
+                    style: TextStyle(
+                      fontSize: 23.sp,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  Text(
+                    "Enter your mobile number to continue",
+                    style: TextStyle(fontSize: 11.sp, color: Colors.white54),
+                  ),
 
-                /// PHONE INPUT
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 4.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showCountryPicker(
-                            context: context,
-                            showPhoneCode: true,
-                            onSelect: (country) {
-                              setState(() => selectedCountry = country);
-                            },
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              selectedCountry.flagEmoji,
-                              style: TextStyle(fontSize: 20.sp),
-                            ),
-                            SizedBox(width: 6.w),
-                            Text(
-                              "+${selectedCountry.phoneCode}",
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
+                  SizedBox(height: 40.h),
+
+                  /// PHONE INPUT
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 4.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            showCountryPicker(
+                              context: context,
+                              showPhoneCode: true,
+                              onSelect: (country) {
+                                setState(() => selectedCountry = country);
+                              },
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                selectedCountry.flagEmoji,
+                                style: TextStyle(fontSize: 20.sp),
                               ),
-                            ),
-                            SizedBox(width: 4.w),
-                            Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-                          ],
-                        ),
-                      ),
-
-                      SizedBox(width: 10.w),
-
-                      Expanded(
-                        child: TextField(
-                          controller: _phoneController,
-                          keyboardType: TextInputType.phone,
-                          style: TextStyle(fontSize: 18.sp),
-                          decoration: InputDecoration(
-                            hintText: "Phone number",
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15.sp,
-                            ),
-                            border: InputBorder.none,
+                              SizedBox(width: 6.w),
+                              Text(
+                                "+${selectedCountry.phoneCode}",
+                                style: TextStyle(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              SizedBox(width: 4.w),
+                              Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.grey,
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
 
-                SizedBox(height: 30.h),
+                        SizedBox(width: 10.w),
 
-                /// TERMS (with checkbox)
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20.h),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Checkbox(
-                        value: _agreed,
-                        activeColor: const Color.fromARGB(255, 2, 120, 255),
-                        onChanged: (value) {
-                          setState(() {
-                            _agreed = value ?? false;
-                          });
-                        },
-                        checkColor: Colors.white,
-                      ),
-                      SizedBox(width: 8.w),
-                      Expanded(
-                        child: Text(
-                          "By continuing, you agree to our Terms & Privacy Policy.",
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 11.sp,
+                        Expanded(
+                          child: TextField(
+                            controller: _phoneController,
+                            keyboardType: TextInputType.phone,
+                            style: TextStyle(fontSize: 18.sp),
+                            decoration: InputDecoration(
+                              hintText: "Phone number",
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 15.sp,
+                              ),
+                              border: InputBorder.none,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                /// SIGN IN BUTTON
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _agreed
-                        ? () {
-                            Get.to(() => const HomeScreen());
-                          }
-                        : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.r),
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: 11.h),
-                      elevation: 6,
-                      shadowColor: Colors.black26,
-                    ),
-                    child: Text(
-                      "Continue",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
-                      ),
+                      ],
                     ),
                   ),
-                ),
 
-                SizedBox(height: 28.h),
+                  SizedBox(height: 30.h),
 
-                /// DIVIDER
-                Row(
-                  children: [
-                    Expanded(child: Divider(color: Colors.white70)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  /// TERMS (with checkbox)
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20.h),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Checkbox(
+                          value: _agreed,
+                          activeColor: const Color.fromARGB(255, 2, 120, 255),
+                          onChanged: (value) {
+                            setState(() {
+                              _agreed = value ?? false;
+                            });
+                          },
+                          checkColor: Colors.white,
+                        ),
+                        SizedBox(width: 8.w),
+                        Expanded(
+                          child: Text(
+                            "By continuing, you agree to our Terms & Privacy Policy.",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 11.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  /// SIGN IN BUTTON
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _agreed
+                          ? () {
+                              Get.to(() => const HomeScreen());
+                            }
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.r),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 11.h),
+                        elevation: 6,
+                        shadowColor: Colors.black26,
+                      ),
                       child: Text(
-                        "OR",
-                        style: TextStyle(color: Colors.white70),
+                        "Continue",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                    Expanded(child: Divider(color: Colors.white70)),
-                  ],
-                ),
+                  ),
 
-                SizedBox(height: 25.h),
+                  SizedBox(height: 28.h),
 
-                /// GOOGLE SIGN-IN
-                _socialButton(
-                  icon:
-                      "https://upload.wikimedia.org/wikipedia/commons/0/09/IOS_Google_icon.png",
-                  text: "Continue with Google",
-                ),
-                SizedBox(height: 16.h),
-                /// FACEBOOK
-                _socialButton(
-                  icon:
-                      "https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png",
-                  text: "Continue with Facebook",
-                ),
-                
-              ],
+                  /// DIVIDER
+                  Row(
+                    children: [
+                      Expanded(child: Divider(color: Colors.white70)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Text(
+                          "OR",
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: Colors.white70)),
+                    ],
+                  ),
+
+                  SizedBox(height: 25.h),
+
+                  /// GOOGLE SIGN-IN
+                  _socialButton(
+                    icon:
+                        "https://upload.wikimedia.org/wikipedia/commons/0/09/IOS_Google_icon.png",
+                    text: "Continue with Google",
+                  ),
+                  SizedBox(height: 16.h),
+
+                  /// FACEBOOK
+                  _socialButton(
+                    icon:
+                        "https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png",
+                    text: "Continue with Facebook",
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 
   /// SOCIAL BUTTON WIDGET
