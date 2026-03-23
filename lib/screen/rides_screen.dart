@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 
 class UpcomingRidesScreen extends StatefulWidget {
   const UpcomingRidesScreen({super.key});
@@ -14,7 +15,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.scaffoldBackground,
       body: SafeArea(
         child: Column(
           children: [
@@ -60,7 +61,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
+                    backgroundColor: AppColors.accent,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -97,14 +98,14 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
             style: GoogleFonts.roboto(
               fontSize: 16,
               fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-              color: isActive ? Colors.black : Colors.grey,
+              color: isActive ? AppColors.textPrimary : AppColors.textSecondary,
             ),
           ),
           const SizedBox(height: 8),
           Container(
             height: 3,
             width: 80,
-            color: isActive ? Colors.black : Colors.transparent,
+            color: isActive ? AppColors.secondary : Colors.transparent,
           ),
         ],
       ),
@@ -124,6 +125,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
               style: GoogleFonts.roboto(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
               ),
             ),
             const SizedBox(height: 12),
@@ -132,7 +134,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
               textAlign: TextAlign.center,
               style: GoogleFonts.roboto(
                 fontSize: 16,
-                color: Colors.grey,
+                color: AppColors.textSecondary,
                 height: 1.4,
               ),
             ),
@@ -142,7 +144,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
               child: Text(
                 'Learn how it works',
                 style: GoogleFonts.roboto(
-                  color: Colors.black,
+                  color: AppColors.primaryLight,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -167,6 +169,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
               style: GoogleFonts.roboto(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
               ),
             ),
             const SizedBox(height: 12),
@@ -175,7 +178,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
               textAlign: TextAlign.center,
               style: GoogleFonts.roboto(
                 fontSize: 16,
-                color: Colors.grey,
+                color: AppColors.textSecondary,
                 height: 1.4,
               ),
             ),
@@ -185,7 +188,7 @@ class _UpcomingRidesScreenState extends State<UpcomingRidesScreen> {
               child: Text(
                 'View ride history',
                 style: GoogleFonts.roboto(
-                  color: Colors.black,
+                  color: AppColors.secondaryDark,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),

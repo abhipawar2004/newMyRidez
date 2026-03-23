@@ -185,9 +185,9 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             circleId: CircleId('ripple_$i'),
             center: widget.pickupLocation,
             radius: radius,
-            strokeColor: AppColors.primary.withOpacity(opacity * 0.6),
+            strokeColor: AppColors.mapPrimary.withOpacity(opacity * 0.6),
             strokeWidth: 3,
-            fillColor: AppColors.primary.withOpacity(opacity * 0.1),
+            fillColor: AppColors.mapPrimary.withOpacity(opacity * 0.1),
           ),
         );
       }
@@ -199,9 +199,9 @@ class _RideBookingScreenState extends State<RideBookingScreen>
           circleId: const CircleId('pulse_center'),
           center: widget.pickupLocation,
           radius: 15, // small radius in meters
-          strokeColor: AppColors.primary.withOpacity(pulseOpacity),
+          strokeColor: AppColors.mapMarker.withOpacity(pulseOpacity),
           strokeWidth: 4,
-          fillColor: AppColors.primary.withOpacity(pulseOpacity * 0.5),
+          fillColor: AppColors.mapMarker.withOpacity(pulseOpacity * 0.5),
         ),
       );
     });

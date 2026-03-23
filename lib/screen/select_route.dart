@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 import 'map_selection_screen.dart';
 
 class RouteScreen extends StatefulWidget {
@@ -56,19 +57,22 @@ class _RouteScreenState extends State<RouteScreen> {
   }) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 0),
-      leading: Icon(icon, color: Colors.black87, size: 24.sp),
+      leading: Icon(icon, color: AppColors.secondaryLight, size: 24.sp),
       title: Text(
         title,
         overflow: TextOverflow.ellipsis,
         style: GoogleFonts.roboto(
           fontSize: 15.sp,
           fontWeight: FontWeight.w500,
-          color: Colors.black87,
+          color: AppColors.textPrimary,
         ),
       ),
       subtitle: Text(
         subtitle,
-        style: GoogleFonts.roboto(fontSize: 13.sp, color: Colors.grey[600]),
+        style: GoogleFonts.roboto(
+          fontSize: 13.sp,
+          color: AppColors.textSecondary,
+        ),
       ),
       onTap: () {
         // Handle address selection
@@ -278,37 +282,37 @@ class _RouteScreenState extends State<RouteScreen> {
                   title: 'Sector 17, Chandigarh',
                   subtitle: 'Shopping area, Chandigarh, Punjab',
                 ),
-                Divider(height: 1, color: Colors.grey[300]),
+                Divider(height: 1, color: AppColors.divider),
                 _buildAddressItem(
                   icon: Icons.location_on,
                   title: 'Phase 7, Mohali',
                   subtitle: 'Industrial Area, Mohali, Punjab',
                 ),
-                Divider(height: 1, color: Colors.grey[300]),
+                Divider(height: 1, color: AppColors.divider),
                 _buildAddressItem(
                   icon: Icons.location_on,
                   title: 'Elante Mall',
                   subtitle: 'Industrial Area Phase 1, Chandigarh',
                 ),
-                Divider(height: 1, color: Colors.grey[300]),
+                Divider(height: 1, color: AppColors.divider),
                 _buildAddressItem(
                   icon: Icons.location_on,
                   title: 'Chandigarh Railway Station',
                   subtitle: 'Station Road, Chandigarh',
                 ),
-                Divider(height: 1, color: Colors.grey[300]),
+                Divider(height: 1, color: AppColors.divider),
                 _buildAddressItem(
                   icon: Icons.location_on,
                   title: 'Sukhna Lake',
                   subtitle: 'Sector 1, Chandigarh',
                 ),
-                Divider(height: 1, color: Colors.grey[300]),
+                Divider(height: 1, color: AppColors.divider),
                 _buildAddressItem(
                   icon: Icons.location_on,
                   title: 'PGI Hospital',
                   subtitle: 'Sector 12, Chandigarh',
                 ),
-                Divider(height: 1, color: Colors.grey[300]),
+                Divider(height: 1, color: AppColors.divider),
                 _buildAddressItem(
                   icon: Icons.location_on,
                   title: 'Panjab University',
@@ -340,7 +344,7 @@ class _RouteScreenState extends State<RouteScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                  backgroundColor: AppColors.accentDark,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
                   ),

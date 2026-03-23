@@ -53,6 +53,7 @@ Widget _infoTile(IconData icon, String label, String value) {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late Future<User> _userFuture;
+  String _userStatus = 'online'; // online, offline, busy
 
   @override
   void initState() {
@@ -146,6 +147,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                             ),
+                            Positioned(
+                              left: 0,
+                              top: 0,
+                              child: Container(
+                                width: 16.w,
+                                height: 16.h,
+                                decoration: BoxDecoration(
+                                  color: _userStatus == 'online'
+                                      ? AppColors.online
+                                      : _userStatus == 'busy'
+                                      ? AppColors.busy
+                                      : AppColors.offline,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: AppColors.scaffoldBackground,
+                                    width: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(height: 12.h),
@@ -155,6 +176,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fontSize: 22.sp,
                             fontWeight: FontWeight.w700,
                             color: AppColors.textPrimary,
+                          ),
+                        ),
+                        SizedBox(height: 4.h),
+                        Text(
+                          _userStatus == 'online'
+                              ? 'Online'
+                              : _userStatus == 'busy'
+                              ? 'Busy'
+                              : 'Offline',
+                          style: GoogleFonts.poppins(
+                            fontSize: 14.sp,
+                            color: _userStatus == 'online'
+                                ? AppColors.online
+                                : _userStatus == 'busy'
+                                ? AppColors.busy
+                                : AppColors.offline,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         SizedBox(height: 8.h),

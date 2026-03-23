@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 
 class DriverFoundScreen extends StatefulWidget {
   final LatLng pickupLocation;
@@ -273,7 +274,7 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                       width: 80.w,
                       height: 80.h,
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        gradient: AppColors.successGradient,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
@@ -452,7 +453,7 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                             // Call button
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.green,
+                                color: AppColors.successDark,
                                 shape: BoxShape.circle,
                               ),
                               child: IconButton(
@@ -468,7 +469,7 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                                       content: Text(
                                         'Calling ${_driverInfo['name']}...',
                                       ),
-                                      backgroundColor: Colors.green,
+                                      backgroundColor: AppColors.success,
                                     ),
                                   );
                                 },
@@ -605,15 +606,17 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                                   Get.back();
                                   Get.back();
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
+                                    SnackBar(
                                       content: Text('Ride cancelled'),
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: AppColors.errorDark,
                                     ),
                                   );
                                 },
                                 child: Text(
                                   'Yes, Cancel',
-                                  style: GoogleFonts.roboto(color: Colors.red),
+                                  style: GoogleFonts.roboto(
+                                    color: AppColors.errorLight,
+                                  ),
                                 ),
                               ),
                             ],
@@ -621,7 +624,7 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                         );
                       },
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: Colors.red, width: 2),
+                        side: BorderSide(color: AppColors.error, width: 2),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.r),
                         ),
@@ -632,7 +635,7 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                         style: GoogleFonts.roboto(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
-                          color: Colors.red,
+                          color: AppColors.error,
                         ),
                       ),
                     ),

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 import 'Authentication/BottomNavigationBar/ride_booking_screen.dart';
 
 class MapSelectionScreen extends StatefulWidget {
@@ -90,7 +91,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                 return Icon(
                   Icons.location_on,
                   size: 48.sp,
-                  color: Colors.black,
+                  color: AppColors.accentDark,
                 );
               },
             ),
@@ -104,17 +105,10 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
             child: Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    const Color.fromARGB(255, 96, 10, 166),
-                    Colors.black,
-                  ],
-                ),
+                gradient: AppColors.accentGradient,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: AppColors.shadow,
                     blurRadius: 6,
                     offset: const Offset(0, -2),
                   ),
@@ -127,7 +121,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                   Container(
                     padding: EdgeInsets.all(12.w),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: AppColors.overlayLight,
                       borderRadius: BorderRadius.circular(8.r),
                       border: Border.all(color: Colors.white.withOpacity(0.3)),
                     ),
