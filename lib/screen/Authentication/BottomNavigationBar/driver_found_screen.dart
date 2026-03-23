@@ -34,7 +34,6 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
   Set<Marker> _markers = {};
   Set<Polyline> _polylines = {};
   late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
 
   // Sample driver data
   final Map<String, dynamic> _driverInfo = {
@@ -106,10 +105,6 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 600),
       vsync: this,
-    );
-
-    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.elasticOut),
     );
 
     _setupMarkersAndRoute();
@@ -186,55 +181,57 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          // Google Map
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: widget.pickupLocation,
-              zoom: 14.0,
-            ),
-            markers: _markers,
-            polylines: _polylines,
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            zoomControlsEnabled: false,
-            style: _mapStyle,
-          ),
-
-          // Back button
-          Positioned(
-            top: 50.h,
-            left: 16.w,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.cardBackground,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.shadow,
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
+          Expanded(
+            child: Stack(
+              children: [
+                // Google Map (top half)
+                GoogleMap(
+                  onMapCreated: _onMapCreated,
+                  initialCameraPosition: CameraPosition(
+                    target: widget.pickupLocation,
+                    zoom: 14.0,
                   ),
-                ],
-              ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.textPrimary,
-                  size: 24.sp,
+                  markers: _markers,
+                  polylines: _polylines,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  zoomControlsEnabled: false,
+                  style: _mapStyle,
                 ),
-                onPressed: () => Navigator.pop(context),
-              ),
+
+                // Back button
+                Positioned(
+                  top: 50.h,
+                  left: 16.w,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.cardBackground,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.shadow,
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: AppColors.textPrimary,
+                        size: 24.sp,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
 
-          // Driver found card - Fixed bottom sheet
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
+          Expanded(
             child: Container(
               decoration: BoxDecoration(
                 gradient: AppColors.darkGradient,
@@ -250,396 +247,305 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                   ),
                 ],
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Drag handle
-                  Container(
-                    width: 40.w,
-                    height: 4.h,
-                    margin: EdgeInsets.symmetric(vertical: 12.h),
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(2.r),
-                    ),
-                  ),
-
-                  // Success animation
-                  ScaleTransition(
-                    scale: _scaleAnimation,
-                    child: Container(
-                      width: 80.w,
-                      height: 80.h,
-                      decoration: BoxDecoration(
-                        gradient: AppColors.successGradient,
-                        shape: BoxShape.circle,
+              child: SafeArea(
+                top: false,
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(bottom: 20.h),
+                  child: Column(
+                    children: [
+                      // Drag handle
+                      Container(
+                        width: 40.w,
+                        height: 4.h,
+                        margin: EdgeInsets.symmetric(vertical: 12.h),
+                        decoration: BoxDecoration(
+                          color: Colors.white70,
+                          borderRadius: BorderRadius.circular(2.r),
+                        ),
                       ),
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.white,
-                        size: 50.sp,
+
+                      // Driver Found Text
+                      Text(
+                        'Driver Found!',
+                        style: GoogleFonts.poppins(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                        ),
                       ),
-                    ),
-                  ),
 
-                  SizedBox(height: 16.h),
+                      // OTP Display Card
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16.w),
+                        padding: EdgeInsets.all(10.w),
 
-                  // Driver Found Text
-                  Text(
-                    'Driver Found!',
-                    style: GoogleFonts.poppins(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-
-                  SizedBox(height: 8.h),
-
-                  Text(
-                    'Your ${widget.vehicleName} is on the way',
-                    style: GoogleFonts.poppins(
-                      fontSize: 14.sp,
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-
-                  SizedBox(height: 20.h),
-
-                  // OTP Display Card
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.w),
-                    padding: EdgeInsets.all(16.w),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          const Color.fromARGB(
-                            255,
-                            198,
-                            99,
-                            255,
-                          ).withOpacity(0.3),
-                          const Color.fromARGB(
-                            255,
-                            46,
-                            0,
-                            125,
-                          ).withOpacity(0.2),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 255, 210, 77),
-                        width: .5,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: Column(
                           children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  _rideOTP,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 32.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    letterSpacing: 8.w,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            // OTP Number Display
+                            SizedBox(height: 5.h),
                             Text(
-                              'Your Ride OTP',
+                              'Share this OTP with your driver',
                               style: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                fontSize: 12.sp,
+                                color: Colors.white70,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 12.h),
-                        // OTP Number Display
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 24.w,
-                            vertical: 12.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Text(
-                            _rideOTP,
-                            style: GoogleFonts.roboto(
-                              fontSize: 32.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              letterSpacing: 8.w,
-                            ),
+                      ),
+
+                      SizedBox(height: 16.h),
+
+                      // Driver info card
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16.w),
+                        padding: EdgeInsets.all(12.w),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(10.r),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.3),
                           ),
                         ),
-                        SizedBox(height: 8.h),
-                        Text(
-                          'Share this OTP with your driver',
-                          style: GoogleFonts.roboto(
-                            fontSize: 12.sp,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(height: 16.h),
-
-                  // Driver info card
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.w),
-                    padding: EdgeInsets.all(16.w),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: Colors.white.withOpacity(0.3)),
-                    ),
-                    child: Column(
-                      children: [
-                        // Driver profile
-                        Row(
+                        child: Column(
                           children: [
-                            // Driver avatar
-                            CircleAvatar(
-                              radius: 30.r,
-                              backgroundColor: Colors.white,
-                              child: Icon(
-                                Icons.person,
-                                size: 35.sp,
-                                color: Colors.black,
-                              ),
-                            ),
-
-                            SizedBox(width: 12.w),
-
-                            // Driver details
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    _driverInfo['name'],
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                            // Driver profile
+                            Row(
+                              children: [
+                                // Driver avatar
+                                CircleAvatar(
+                                  radius: 24.r,
+                                  backgroundColor: Colors.white,
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 28.sp,
+                                    color: Colors.black,
                                   ),
-                                  SizedBox(height: 4.h),
-                                  Row(
+                                ),
+
+                                SizedBox(width: 10.w),
+
+                                // Driver details
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                        size: 16.sp,
-                                      ),
-                                      SizedBox(width: 4.w),
                                       Text(
-                                        '${_driverInfo['rating']} (${_driverInfo['totalRides']} rides)',
+                                        _driverInfo['name'],
                                         style: GoogleFonts.roboto(
-                                          fontSize: 12.sp,
-                                          color: Colors.white70,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
                                         ),
+                                      ),
+                                      SizedBox(height: 2.h),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                            size: 13.sp,
+                                          ),
+                                          SizedBox(width: 3.w),
+                                          Text(
+                                            '${_driverInfo['rating']} (${_driverInfo['totalRides']} rides)',
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 10.sp,
+                                              color: Colors.white70,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
-                            ),
-
-                            // Call button
-                            Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.successDark,
-                                shape: BoxShape.circle,
-                              ),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.phone,
-                                  color: Colors.white,
-                                  size: 24.sp,
                                 ),
-                                onPressed: () {
-                                  // Handle call
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Calling ${_driverInfo['name']}...',
-                                      ),
-                                      backgroundColor: AppColors.success,
+
+                                // Call button
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.successDark,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.phone,
+                                      color: Colors.white,
+                                      size: 18.sp,
                                     ),
-                                  );
-                                },
-                              ),
+                                    padding: EdgeInsets.all(8.w),
+                                    constraints: const BoxConstraints(),
+                                    onPressed: () {
+                                      // Handle call
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Calling ${_driverInfo['name']}...',
+                                          ),
+                                          backgroundColor: AppColors.success,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
 
-                        SizedBox(height: 16.h),
+                            SizedBox(height: 10.h),
 
-                        // Car details
-                        Container(
-                          padding: EdgeInsets.all(12.w),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                            // Car details
+                            Container(
+                              padding: EdgeInsets.all(10.w),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                              child: Column(
                                 children: [
-                                  Text(
-                                    _driverInfo['carModel'],
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            _driverInfo['carModel'],
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          SizedBox(height: 2.h),
+                                          Text(
+                                            _driverInfo['carNumber'],
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.directions_car,
+                                        size: 30.sp,
+                                        color: Colors.white,
+                                      ),
+                                    ],
                                   ),
-                                  SizedBox(height: 4.h),
-                                  Text(
-                                    _driverInfo['carNumber'],
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                               
+                                 
                                 ],
                               ),
-                              Icon(
-                                Icons.directions_car,
-                                size: 40.sp,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(height: 16.h),
-
-                  // Ride details
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.w),
-                    padding: EdgeInsets.all(12.w),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: Colors.white.withOpacity(0.3)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Payment method
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.payment,
-                              color: Colors.white,
-                              size: 20.sp,
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              widget.paymentMethod,
-                              style: GoogleFonts.roboto(
-                                fontSize: 14.sp,
-                                color: Colors.white,
-                              ),
                             ),
                           ],
                         ),
-                        // Price
-                        Text(
-                          widget.vehiclePrice,
-                          style: GoogleFonts.roboto(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      ),
 
-                  SizedBox(height: 16.h),
+                      SizedBox(height: 16.h),
 
-                  // Cancel ride button
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.w),
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        // Show confirmation dialog
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            backgroundColor: Colors.grey[900],
-                            title: Text(
-                              'Cancel Ride?',
-                              style: GoogleFonts.roboto(color: Colors.white),
-                            ),
-                            content: Text(
-                              'Are you sure you want to cancel this ride?',
-                              style: GoogleFonts.roboto(color: Colors.white70),
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text(
-                                  'No',
+                      // Cancel ride button
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16.w),
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            // Show confirmation dialog
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                backgroundColor: Colors.grey[900],
+                                title: Text(
+                                  'Cancel Ride?',
                                   style: GoogleFonts.roboto(
                                     color: Colors.white,
                                   ),
                                 ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  Get.back();
-                                  Get.back();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Ride cancelled'),
-                                      backgroundColor: AppColors.errorDark,
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  'Yes, Cancel',
+                                content: Text(
+                                  'Are you sure you want to cancel this ride?',
                                   style: GoogleFonts.roboto(
-                                    color: AppColors.errorLight,
+                                    color: Colors.white70,
                                   ),
                                 ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text(
+                                      'No',
+                                      style: GoogleFonts.roboto(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Get.back();
+                                      Get.back();
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text('Ride cancelled'),
+                                          backgroundColor: AppColors.errorDark,
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Yes, Cancel',
+                                      style: GoogleFonts.roboto(
+                                        color: AppColors.errorLight,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            );
+                          },
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: AppColors.error, width: 2),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
                           ),
-                        );
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: AppColors.error, width: 2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        padding: EdgeInsets.symmetric(vertical: 14.h),
-                      ),
-                      child: Text(
-                        'Cancel Ride',
-                        style: GoogleFonts.roboto(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.error,
+                          child: Text(
+                            'Cancel Ride',
+                            style: GoogleFonts.roboto(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.error,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
 
-                  SizedBox(height: 20.h),
-                ],
+                      SizedBox(
+                        height: MediaQuery.of(context).padding.bottom + 20.h,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

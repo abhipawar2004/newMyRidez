@@ -57,7 +57,7 @@ class _RouteScreenState extends State<RouteScreen> {
   }) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 0),
-      leading: Icon(icon, color: AppColors.secondaryLight, size: 24.sp),
+      leading: Icon(icon, color: AppColors.primary, size: 24.sp),
       title: Text(
         title,
         overflow: TextOverflow.ellipsis,
@@ -140,22 +140,22 @@ class _RouteScreenState extends State<RouteScreen> {
                             ),
                             child: Row(
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 11.w,
-                                  ),
-                                  child: Icon(
-                                    Icons.search,
-                                    color: AppColors.textPrimary,
-                                    size: 24.sp,
-                                  ),
-                                ),
+                                // Padding(
+                                //   padding: EdgeInsets.symmetric(
+                                //     horizontal: 11.w,
+                                //   ),
+                                //   child: Icon(
+                                //     Icons.location_on,
+                                //     color: AppColors.textPrimary,
+                                //     size: 24.sp,
+                                //   ),
+                                // ),
                                 Expanded(
                                   child: TextField(
                                     controller: _pickupController,
                                     focusNode: _pickupFocusNode,
                                     decoration: InputDecoration(
-                                      hintText: 'Pickup location',
+                                      hintText: ' Pickup location',
                                       hintStyle: GoogleFonts.poppins(
                                         color: AppColors.textSecondary,
                                         fontSize: 16.sp,
@@ -180,7 +180,7 @@ class _RouteScreenState extends State<RouteScreen> {
 
                         IconButton(
                           icon: Icon(
-                            Icons.my_location,
+                            Icons.location_on,
                             color: AppColors.textPrimary,
                             size: 24.sp,
                           ),
@@ -205,22 +205,13 @@ class _RouteScreenState extends State<RouteScreen> {
                             ),
                             child: Row(
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 14.w,
-                                  ),
-                                  child: Icon(
-                                    Icons.circle_outlined,
-                                    color: AppColors.textPrimary,
-                                    size: 20.sp,
-                                  ),
-                                ),
+                              
                                 Expanded(
                                   child: TextField(
                                     controller: _dropoffController,
                                     focusNode: _dropoffFocusNode,
                                     decoration: InputDecoration(
-                                      hintText: 'Dropoff location',
+                                      hintText: ' Dropoff location',
                                       hintStyle: GoogleFonts.poppins(
                                         color: AppColors.textSecondary,
                                         fontSize: 16.sp,
@@ -260,10 +251,24 @@ class _RouteScreenState extends State<RouteScreen> {
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.only(left: 16.w, top: 8.h),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Recents ',
+                style: GoogleFonts.poppins(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.textPrimary,
+                ),
+              ),
+            ),
+          ),
           // Address suggestions
           Expanded(
             child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              padding: EdgeInsets.only(left: 16.w, top: 5.h),
               children: [
                 _buildAddressItem(
                   icon: Icons.location_on,
@@ -314,7 +319,7 @@ class _RouteScreenState extends State<RouteScreen> {
             padding: EdgeInsets.all(16.0.w),
             child: SizedBox(
               width: double.infinity,
-              height: 50.h,
+
               child: ElevatedButton(
                 onPressed: () {
                   // Navigate to map selection screen with static coordinates
@@ -333,6 +338,7 @@ class _RouteScreenState extends State<RouteScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
+                  padding: EdgeInsets.symmetric(vertical: 14.h),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
                   ),
@@ -340,7 +346,6 @@ class _RouteScreenState extends State<RouteScreen> {
                 child: Text(
                   'Find Driver',
                   style: GoogleFonts.poppins(
-                    fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -348,6 +353,7 @@ class _RouteScreenState extends State<RouteScreen> {
               ),
             ),
           ),
+          SizedBox(height: MediaQuery.of(context).padding.bottom + 20),
         ],
       ),
     );

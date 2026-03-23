@@ -195,13 +195,13 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                       child: Text(
                         'Confirm & Find Driver',
                         style: GoogleFonts.poppins(
-                          fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
                       ),
                     ),
                   ),
+                  SizedBox(height: MediaQuery.of(context).padding.bottom+20.h),
                 ],
               ),
             ),

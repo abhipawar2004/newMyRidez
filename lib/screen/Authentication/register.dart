@@ -78,13 +78,6 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       color: AppColors.cardBackground,
                       borderRadius: BorderRadius.circular(12.r),
                       border: Border.all(color: AppColors.border),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.shadow,
-                          blurRadius: 10,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
                     ),
                     child: Row(
                       children: [
@@ -139,6 +132,8 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                                 fontSize: 15.sp,
                               ),
                               border: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
                             ),
                           ),
                         ),
@@ -227,13 +222,13 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                   SizedBox(height: 25.h),
 
                   _socialButton(
-                    icon: Icons.g_mobiledata_rounded,
+                    imageUrl: 'assets/images/google.png',
                     text: "Continue with Google",
                   ),
                   SizedBox(height: 16.h),
 
                   _socialButton(
-                    icon: Icons.facebook,
+                    imageUrl: 'assets/images/fb.png',
                     text: "Continue with Facebook",
                   ),
                 ],
@@ -245,7 +240,7 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
     );
   }
 
-  Widget _socialButton({required IconData icon, required String text}) {
+  Widget _socialButton({required String imageUrl, required String text}) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30.r),
@@ -264,7 +259,19 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 22.sp, color: AppColors.textPrimary),
+            SizedBox(
+              height: 20.sp,
+              width: 20.sp,
+              child: Image.asset(
+                imageUrl,
+                fit: BoxFit.contain,
+                errorBuilder: (_, __, ___) => Icon(
+                  Icons.image_not_supported_outlined,
+                  size: 20.sp,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+            ),
             SizedBox(width: 10.w),
             Text(
               text,

@@ -80,8 +80,8 @@ class AppDrawer extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.primaryDark.withOpacity(0.5),
-            AppColors.secondaryDark.withOpacity(0.3),
+            AppColors.primary,
+            AppColors.primaryDark,
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -109,9 +109,12 @@ class AppDrawer extends StatelessWidget {
                 children: [
                   Text(
                     'Abhishek Pawar',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    
                     style: GoogleFonts.poppins(
                       color: AppColors.textPrimary,
-                      fontSize: 19,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -119,7 +122,7 @@ class AppDrawer extends StatelessWidget {
                   Text(
                     'View Profile',
                     style: GoogleFonts.poppins(
-                      color: AppColors.textSecondary,
+                      color: AppColors.textPrimary,
                       fontSize: 13,
                     ),
                   ),

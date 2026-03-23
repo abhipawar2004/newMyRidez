@@ -311,13 +311,6 @@ class _RideBookingScreenState extends State<RideBookingScreen>
               decoration: BoxDecoration(
                 color: AppColors.cardBackground,
                 shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.shadow,
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
               ),
               child: IconButton(
                 icon: Icon(
@@ -427,7 +420,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
               Text(
                 'Choose a ride',
                 style: GoogleFonts.poppins(
-                  fontSize: 20.sp,
+                  fontSize: 19.sp,
                   fontWeight: FontWeight.w700,
                   color: AppColors.textPrimary,
                 ),
@@ -484,7 +477,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                         child: Icon(
                           vehicle['icon'],
                           size: 32.sp,
-                          color: AppColors.primaryLight,
+                          color: AppColors.primary,
                         ),
                       ),
 

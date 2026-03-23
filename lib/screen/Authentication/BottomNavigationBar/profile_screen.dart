@@ -99,7 +99,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             end: Alignment.bottomCenter,
             colors: [
               AppColors.primary,
-              AppColors.primaryDark,
               AppColors.scaffoldBackground,
             ],
           ),
