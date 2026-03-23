@@ -17,11 +17,7 @@ class AppDrawer extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black],
-          ),
+          gradient: AppColors.darkGradient,
           borderRadius: const BorderRadius.horizontal(
             right: Radius.circular(20),
           ),
@@ -84,8 +80,8 @@ class AppDrawer extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color.fromARGB(255, 11, 2, 17).withOpacity(0.5),
-            const Color.fromARGB(255, 255, 0, 0).withOpacity(0.3),
+            AppColors.primaryDark.withOpacity(0.5),
+            AppColors.secondaryDark.withOpacity(0.3),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -113,8 +109,8 @@ class AppDrawer extends StatelessWidget {
                 children: [
                   Text(
                     'Abhishek Pawar',
-                    style: GoogleFonts.rosario(
-                      color: Colors.white,
+                    style: GoogleFonts.poppins(
+                      color: AppColors.textPrimary,
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
                     ),
@@ -122,8 +118,8 @@ class AppDrawer extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     'View Profile',
-                    style: GoogleFonts.rosario(
-                      color: Colors.white70,
+                    style: GoogleFonts.poppins(
+                      color: AppColors.textSecondary,
                       fontSize: 13,
                     ),
                   ),
@@ -141,9 +137,9 @@ class AppDrawer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Text(
         title.toUpperCase(),
-        style: GoogleFonts.rosario(
+        style: GoogleFonts.poppins(
           fontSize: 11,
-          color: Colors.white,
+          color: AppColors.textSecondary,
           fontWeight: FontWeight.bold,
           letterSpacing: 1,
         ),
@@ -159,18 +155,21 @@ class AppDrawer extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.overlay,
+          color: AppColors.cardBackground.withOpacity(0.65),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+          border: Border.all(color: AppColors.border, width: 1),
         ),
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          leading: Icon(icon, color: Colors.white),
+          leading: Icon(icon, color: AppColors.textPrimary),
           title: Text(
             title,
-            style: const TextStyle(fontSize: 15, color: Colors.white),
+            style: GoogleFonts.poppins(
+              fontSize: 15,
+              color: AppColors.textPrimary,
+            ),
           ),
           onTap: onTap,
         ),
@@ -185,15 +184,18 @@ class AppDrawer extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.overlay,
+          color: AppColors.cardBackground.withOpacity(0.65),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+          border: Border.all(color: AppColors.border, width: 1),
         ),
         child: ListTile(
-          leading: const Icon(Icons.logout, color: Colors.white),
-          title: const Text(
+          leading: Icon(Icons.logout, color: AppColors.errorLight),
+          title: Text(
             "Logout",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: GoogleFonts.poppins(
+              color: AppColors.errorLight,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           onTap: () {},
         ),

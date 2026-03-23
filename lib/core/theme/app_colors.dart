@@ -26,28 +26,26 @@ class AppColors {
   static const Color errorLight = Color(0xFFF87171);
   static const Color errorDark = Color(0xFFDC2626);
 
-  // Background Colors
-  static const Color background = Color(0xFFF8FAFC); // Primary Background
-  static const Color cardBackground = Color(
-    0xFFFFFFFF,
-  ); // Card / Sheet Background
-  static const Color scaffoldBackground = Color(0xFFF8FAFC);
+  // Dark Theme Background Colors
+  static const Color background = Color(0xFF0F172A); // Dark Blue-Black
+  static const Color cardBackground = Color(0xFF1E293B); // Dark Card
+  static const Color scaffoldBackground = Color(0xFF0F172A);
 
-  // Text Colors
-  static const Color textPrimary = Color(0xFF0F172A); // Almost black
-  static const Color textSecondary = Color(0xFF475569); // Muted gray
-  static const Color textDisabled = Color(0xFF94A3B8); // Disabled text
-  static const Color textHint = Color(0xFFCBD5E1);
+  // Dark Theme Text Colors
+  static const Color textPrimary = Color(0xFFF8FAFC); // Almost white
+  static const Color textSecondary = Color(0xFFCBD5E1); // Light gray
+  static const Color textDisabled = Color(0xFF64748B); // Muted gray
+  static const Color textHint = Color(0xFF475569);
 
   // Status Colors
   static const Color online = Color(0xFF14B8A6); // Teal Green
-  static const Color offline = Color(0xFF94A3B8);
+  static const Color offline = Color(0xFF64748B);
   static const Color busy = Color(0xFFF59E0B);
 
   // Additional UI Colors
-  static const Color divider = Color(0xFFE2E8F0);
-  static const Color border = Color(0xFFCBD5E1);
-  static const Color shadow = Color(0x1A000000);
+  static const Color divider = Color(0xFF334155);
+  static const Color border = Color(0xFF475569);
+  static const Color shadow = Color(0x40000000);
 
   // Gradient Colors
   static const LinearGradient primaryGradient = LinearGradient(
@@ -66,6 +64,18 @@ class AppColors {
     colors: [Color(0xFFF59E0B), Color(0xFFFBBF24)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient darkGradient = LinearGradient(
+    colors: [Color(0xFF1E293B), Color(0xFF0F172A)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  static const LinearGradient primaryDarkGradient = LinearGradient(
+    colors: [Color(0xFF1E293B), Color(0xFFA4CE4E), Color(0xFF0F172A)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
   );
 
   // Overlay Colors

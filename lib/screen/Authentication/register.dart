@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ride_app/core/theme/app_colors.dart';
 import 'package:ride_app/screen/Authentication/BottomNavigationBar/home_screen.dart';
 
 class PhoneSignInScreen extends StatefulWidget {
@@ -38,17 +40,7 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
     return Scaffold(
       body: Container(
         height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              const Color.fromARGB(255, 96, 10, 166),
-              Colors.black,
-              Colors.black,
-            ],
-          ),
-        ),
+        decoration: const BoxDecoration(gradient: AppColors.darkGradient),
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -58,35 +50,37 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                 children: [
                   SizedBox(height: 50.h),
 
-                  /// TITLE
                   Text(
                     "Verify your number",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 23.sp,
                       fontWeight: FontWeight.w800,
-                      color: Colors.white,
+                      color: AppColors.textPrimary,
                     ),
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     "Enter your mobile number to continue",
-                    style: TextStyle(fontSize: 11.sp, color: Colors.white54),
+                    style: GoogleFonts.poppins(
+                      fontSize: 11.sp,
+                      color: AppColors.textSecondary,
+                    ),
                   ),
 
                   SizedBox(height: 40.h),
 
-                  /// PHONE INPUT
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 16.w,
                       vertical: 4.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.cardBackground,
                       borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(color: AppColors.border),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black12,
+                          color: AppColors.shadow,
                           blurRadius: 10,
                           offset: Offset(0, 4),
                         ),
@@ -113,16 +107,16 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                               SizedBox(width: 6.w),
                               Text(
                                 "+${selectedCountry.phoneCode}",
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
+                                  color: AppColors.textPrimary,
                                 ),
                               ),
                               SizedBox(width: 4.w),
                               Icon(
                                 Icons.keyboard_arrow_down,
-                                color: Colors.grey,
+                                color: AppColors.textSecondary,
                               ),
                             ],
                           ),
@@ -134,11 +128,14 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                           child: TextField(
                             controller: _phoneController,
                             keyboardType: TextInputType.phone,
-                            style: TextStyle(fontSize: 18.sp),
+                            style: GoogleFonts.poppins(
+                              fontSize: 18.sp,
+                              color: AppColors.textPrimary,
+                            ),
                             decoration: InputDecoration(
                               hintText: "Phone number",
-                              hintStyle: TextStyle(
-                                color: Colors.grey,
+                              hintStyle: GoogleFonts.poppins(
+                                color: AppColors.textHint,
                                 fontSize: 15.sp,
                               ),
                               border: InputBorder.none,
@@ -151,7 +148,6 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
 
                   SizedBox(height: 30.h),
 
-                  /// TERMS (with checkbox)
                   Padding(
                     padding: EdgeInsets.only(bottom: 20.h),
                     child: Row(
@@ -159,7 +155,7 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       children: [
                         Checkbox(
                           value: _agreed,
-                          activeColor: const Color.fromARGB(255, 2, 120, 255),
+                          activeColor: AppColors.primary,
                           onChanged: (value) {
                             setState(() {
                               _agreed = value ?? false;
@@ -172,8 +168,8 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                           child: Text(
                             "By continuing, you agree to our Terms & Privacy Policy.",
                             textAlign: TextAlign.start,
-                            style: TextStyle(
-                              color: Colors.white70,
+                            style: GoogleFonts.poppins(
+                              color: AppColors.textSecondary,
                               fontSize: 11.sp,
                             ),
                           ),
@@ -182,7 +178,6 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                     ),
                   ),
 
-                  /// SIGN IN BUTTON
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -192,7 +187,7 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                             }
                           : null,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: AppColors.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.r),
                         ),
@@ -202,10 +197,10 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       ),
                       child: Text(
                         "Continue",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w700,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -213,35 +208,32 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
 
                   SizedBox(height: 28.h),
 
-                  /// DIVIDER
                   Row(
                     children: [
-                      Expanded(child: Divider(color: Colors.white70)),
+                      Expanded(child: Divider(color: AppColors.divider)),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12.w),
                         child: Text(
                           "OR",
-                          style: TextStyle(color: Colors.white70),
+                          style: GoogleFonts.poppins(
+                            color: AppColors.textSecondary,
+                          ),
                         ),
                       ),
-                      Expanded(child: Divider(color: Colors.white70)),
+                      Expanded(child: Divider(color: AppColors.divider)),
                     ],
                   ),
 
                   SizedBox(height: 25.h),
 
-                  /// GOOGLE SIGN-IN
                   _socialButton(
-                    icon:
-                        "https://upload.wikimedia.org/wikipedia/commons/0/09/IOS_Google_icon.png",
+                    icon: Icons.g_mobiledata_rounded,
                     text: "Continue with Google",
                   ),
                   SizedBox(height: 16.h),
 
-                  /// FACEBOOK
                   _socialButton(
-                    icon:
-                        "https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png",
+                    icon: Icons.facebook,
                     text: "Continue with Facebook",
                   ),
                 ],
@@ -253,12 +245,12 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
     );
   }
 
-  /// SOCIAL BUTTON WIDGET
-  Widget _socialButton({required String icon, required String text}) {
+  Widget _socialButton({required IconData icon, required String text}) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30.r),
-        border: Border.all(color: Colors.white70),
+        border: Border.all(color: AppColors.border),
+        color: AppColors.cardBackground,
       ),
       child: OutlinedButton(
         onPressed: () {},
@@ -272,12 +264,12 @@ class _PhoneSignInScreenState extends State<PhoneSignInScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(icon, height: 22.h),
+            Icon(icon, size: 22.sp, color: AppColors.textPrimary),
             SizedBox(width: 10.w),
             Text(
               text,
-              style: TextStyle(
-                color: Colors.white70,
+              style: GoogleFonts.poppins(
+                color: AppColors.textPrimary,
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w500,
               ),

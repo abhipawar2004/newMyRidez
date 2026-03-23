@@ -209,18 +209,22 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
             left: 16.w,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.cardBackground,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: AppColors.shadow,
                     blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),
                 ],
               ),
               child: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.black, size: 24.sp),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.textPrimary,
+                  size: 24.sp,
+                ),
                 onPressed: () => Navigator.pop(context),
               ),
             ),
@@ -233,14 +237,7 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
             bottom: 0,
             child: Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    const Color.fromARGB(255, 96, 10, 166),
-                    Colors.black,
-                  ],
-                ),
+                gradient: AppColors.darkGradient,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20.r),
                   topRight: Radius.circular(20.r),
@@ -290,10 +287,10 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
                   // Driver Found Text
                   Text(
                     'Driver Found!',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.poppins(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: AppColors.textPrimary,
                     ),
                   ),
 
@@ -301,9 +298,9 @@ class _DriverFoundScreenState extends State<DriverFoundScreen>
 
                   Text(
                     'Your ${widget.vehicleName} is on the way',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.poppins(
                       fontSize: 14.sp,
-                      color: Colors.white70,
+                      color: AppColors.textSecondary,
                     ),
                   ),
 

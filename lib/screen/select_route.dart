@@ -88,28 +88,20 @@ class _RouteScreenState extends State<RouteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.scaffoldBackground,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [const Color.fromARGB(255, 0, 0, 0)!, Colors.black],
-            ),
-          ),
-        ),
+        backgroundColor: AppColors.cardBackground,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.close, color: Colors.white, size: 28.sp),
+          icon: Icon(Icons.close, color: AppColors.textPrimary, size: 28.sp),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Your route',
-          style: GoogleFonts.roboto(
-            color: Colors.white,
+          style: GoogleFonts.poppins(
+            color: AppColors.textPrimary,
             fontSize: 20.sp,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
@@ -118,14 +110,10 @@ class _RouteScreenState extends State<RouteScreen> {
           // Route input fields
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [const Color.fromARGB(255, 96, 10, 166), Colors.black],
-              ),
+              gradient: AppColors.darkGradient,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: AppColors.shadow,
                   blurRadius: 6,
                   offset: const Offset(0, 2),
                 ),
@@ -144,8 +132,8 @@ class _RouteScreenState extends State<RouteScreen> {
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: _isPickupFocused
-                                    ? Colors.white
-                                    : Colors.grey[600]!,
+                                    ? AppColors.primary
+                                    : AppColors.border,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(12.r),
@@ -158,7 +146,7 @@ class _RouteScreenState extends State<RouteScreen> {
                                   ),
                                   child: Icon(
                                     Icons.search,
-                                    color: Colors.white,
+                                    color: AppColors.textPrimary,
                                     size: 24.sp,
                                   ),
                                 ),
@@ -168,8 +156,8 @@ class _RouteScreenState extends State<RouteScreen> {
                                     focusNode: _pickupFocusNode,
                                     decoration: InputDecoration(
                                       hintText: 'Pickup location',
-                                      hintStyle: TextStyle(
-                                        color: Colors.white,
+                                      hintStyle: GoogleFonts.poppins(
+                                        color: AppColors.textSecondary,
                                         fontSize: 16.sp,
                                       ),
                                       border: OutlineInputBorder(
@@ -180,7 +168,7 @@ class _RouteScreenState extends State<RouteScreen> {
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.textPrimary,
                                       fontSize: 16.sp,
                                     ),
                                   ),
@@ -193,7 +181,7 @@ class _RouteScreenState extends State<RouteScreen> {
                         IconButton(
                           icon: Icon(
                             Icons.my_location,
-                            color: Colors.white,
+                            color: AppColors.textPrimary,
                             size: 24.sp,
                           ),
                           onPressed: () {},
@@ -209,8 +197,8 @@ class _RouteScreenState extends State<RouteScreen> {
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: _isDropoffFocused
-                                    ? Colors.white
-                                    : Colors.grey[600]!,
+                                    ? AppColors.primary
+                                    : AppColors.border,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(12.r),
@@ -223,7 +211,7 @@ class _RouteScreenState extends State<RouteScreen> {
                                   ),
                                   child: Icon(
                                     Icons.circle_outlined,
-                                    color: Colors.white,
+                                    color: AppColors.textPrimary,
                                     size: 20.sp,
                                   ),
                                 ),
@@ -233,8 +221,8 @@ class _RouteScreenState extends State<RouteScreen> {
                                     focusNode: _dropoffFocusNode,
                                     decoration: InputDecoration(
                                       hintText: 'Dropoff location',
-                                      hintStyle: TextStyle(
-                                        color: Colors.white,
+                                      hintStyle: GoogleFonts.poppins(
+                                        color: AppColors.textSecondary,
                                         fontSize: 16.sp,
                                       ),
                                       border: InputBorder.none,
@@ -243,7 +231,7 @@ class _RouteScreenState extends State<RouteScreen> {
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.textPrimary,
                                       fontSize: 16.sp,
                                     ),
                                   ),
@@ -255,7 +243,7 @@ class _RouteScreenState extends State<RouteScreen> {
                         IconButton(
                           icon: Icon(
                             Icons.swap_vert,
-                            color: Colors.white,
+                            color: AppColors.textPrimary,
                             size: 24.sp,
                           ),
                           onPressed: () {
@@ -344,14 +332,14 @@ class _RouteScreenState extends State<RouteScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.accentDark,
+                  backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
                 child: Text(
                   'Find Driver',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.poppins(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,

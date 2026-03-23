@@ -151,16 +151,6 @@ class _RideBookingScreenState extends State<RideBookingScreen>
       }
     });
 
-    // Debug: Print received coordinates CLEARLY
-    print('========================================');
-    print('RIDE BOOKING SCREEN RECEIVED:');
-    print(
-      'Pickup: ${widget.pickupLocation.latitude}, ${widget.pickupLocation.longitude}',
-    );
-    print(
-      'Dropoff: ${widget.dropoffLocation.latitude}, ${widget.dropoffLocation.longitude}',
-    );
-    print('========================================');
     _setupMarkersAndRoute();
   }
 
@@ -237,23 +227,6 @@ class _RideBookingScreenState extends State<RideBookingScreen>
         patterns: [PatternItem.dash(20), PatternItem.gap(10)],
       ),
     };
-
-    // Debug: Print PATH coordinates CLEARLY
-    print('========================================');
-    print('PATH CREATED BETWEEN:');
-    print(
-      'Point 1 (Pickup): ${widget.pickupLocation.latitude}, ${widget.pickupLocation.longitude}',
-    );
-    print(
-      'Point 2 (Dropoff): ${widget.dropoffLocation.latitude}, ${widget.dropoffLocation.longitude}',
-    );
-    print(
-      'Lat difference: ${(widget.dropoffLocation.latitude - widget.pickupLocation.latitude).abs()}',
-    );
-    print(
-      'Lng difference: ${(widget.dropoffLocation.longitude - widget.pickupLocation.longitude).abs()}',
-    );
-    print('========================================');
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -365,7 +338,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
             builder: (context, scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  gradient: AppColors.primaryGradient,
+                  gradient: AppColors.darkGradient,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),
                     topRight: Radius.circular(20.r),
@@ -511,7 +484,7 @@ class _RideBookingScreenState extends State<RideBookingScreen>
                         child: Icon(
                           vehicle['icon'],
                           size: 32.sp,
-                          color: AppColors.primary,
+                          color: AppColors.primaryLight,
                         ),
                       ),
 

@@ -52,13 +52,11 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
     setState(() {
       _currentDropoffPosition = position.target;
     });
-    print('Camera moved to: ${position.target}');
   }
 
   void _onCameraIdle() {
     // Update state when camera stops moving
     setState(() {});
-    print('Camera idle at: $_currentDropoffPosition');
   }
 
   @override
@@ -105,7 +103,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
             child: Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                gradient: AppColors.accentGradient,
+                gradient: AppColors.darkGradient,
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.shadow,
@@ -121,9 +119,9 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                   Container(
                     padding: EdgeInsets.all(12.w),
                     decoration: BoxDecoration(
-                      color: AppColors.overlayLight,
+                      color: AppColors.cardBackground.withOpacity(0.85),
                       borderRadius: BorderRadius.circular(8.r),
-                      border: Border.all(color: Colors.white.withOpacity(0.3)),
+                      border: Border.all(color: AppColors.border),
                     ),
                     child: Column(
                       children: [
@@ -131,7 +129,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                           children: [
                             Icon(
                               Icons.location_on,
-                              color: Colors.white,
+                              color: AppColors.primary,
                               size: 20.sp,
                             ),
                             SizedBox(width: 8.w),
@@ -140,7 +138,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                                 'Lat: ${_currentDropoffPosition.latitude.toStringAsFixed(6)}',
                                 style: GoogleFonts.roboto(
                                   fontSize: 12.sp,
-                                  color: Colors.white,
+                                  color: AppColors.textPrimary,
                                 ),
                               ),
                             ),
@@ -151,7 +149,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                           children: [
                             Icon(
                               Icons.location_on,
-                              color: Colors.white,
+                              color: AppColors.primary,
                               size: 20.sp,
                             ),
                             SizedBox(width: 8.w),
@@ -160,7 +158,7 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                                 'Lng: ${_currentDropoffPosition.longitude.toStringAsFixed(6)}',
                                 style: GoogleFonts.roboto(
                                   fontSize: 12.sp,
-                                  color: Colors.white,
+                                  color: AppColors.textPrimary,
                                 ),
                               ),
                             ),
@@ -176,17 +174,6 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                     height: 50.h,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Debug: Print the coordinates CLEARLY
-                        print('========================================');
-                        print('SELECTED LOCATIONS:');
-                        print(
-                          'Pickup Location: ${widget.pickupLocation.latitude}, ${widget.pickupLocation.longitude}',
-                        );
-                        print(
-                          'NEW Dropoff Location: ${_currentDropoffPosition.latitude}, ${_currentDropoffPosition.longitude}',
-                        );
-                        print('========================================');
-
                         // Navigate to ride booking screen with UPDATED dropoff location
                         Get.to(
                           () => RideBookingScreen(
@@ -200,17 +187,17 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: AppColors.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                       ),
                       child: Text(
                         'Confirm & Find Driver',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.poppins(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -237,9 +224,9 @@ class _MapSelectionScreenState extends State<MapSelectionScreen> {
                   );
                 }
               },
-              backgroundColor: Colors.white,
+              backgroundColor: AppColors.cardBackground,
               mini: true,
-              child: Icon(Icons.my_location, color: Colors.black),
+              child: Icon(Icons.my_location, color: AppColors.textPrimary),
             ),
           ),
         ],
