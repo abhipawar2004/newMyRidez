@@ -80,7 +80,7 @@ class AppDrawer extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.primary,
+            AppColors.primaryDark,
             AppColors.primaryDark,
           ],
           begin: Alignment.topLeft,

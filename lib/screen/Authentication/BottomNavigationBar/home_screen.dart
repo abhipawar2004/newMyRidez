@@ -153,173 +153,175 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      appBar: null,
-      drawer: const AppDrawer(),
-      backgroundColor: AppColors.scaffoldBackground,
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Stack(
-              children: [
-                // MAP - takes remaining space after sheet
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: screenHeight * _sheetHeight,
-                  child: GoogleMap(
-                    onMapCreated: _onMapCreated,
-                    initialCameraPosition: CameraPosition(
-                      target: _currentPosition ?? _defaultCenter,
-                      zoom: 25.0,
-                    ),
-                    myLocationEnabled: true,
-                    zoomControlsEnabled: false,
-                    buildingsEnabled: false,
-
-                    style: _mapStyle,
-                  ),
-                ),
-
-                // MENU BUTTON (TOP LEFT)
-                Positioned(
-                  top: 50,
-                  left: 16,
-                  child: Builder(
-                    builder: (context) => Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.cardBackground,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.shadow,
-                            spreadRadius: 1,
-                            blurRadius: 6,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: null,
+        drawer: const AppDrawer(),
+        backgroundColor: AppColors.scaffoldBackground,
+        body: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Stack(
+                children: [
+                  // MAP - takes remaining space after sheet
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: screenHeight * _sheetHeight,
+                    child: GoogleMap(
+                      onMapCreated: _onMapCreated,
+                      initialCameraPosition: CameraPosition(
+                        target: _currentPosition ?? _defaultCenter,
+                        zoom: 25.0,
                       ),
-                      child: IconButton(
-                        icon: Icon(Icons.menu, color: AppColors.textPrimary),
-                        onPressed: () => Scaffold.of(context).openDrawer(),
-                      ),
+                      myLocationEnabled: true,
+                      zoomControlsEnabled: false,
+                      buildingsEnabled: false,
+      
+                      style: _mapStyle,
                     ),
                   ),
-                ),
-
-                // DRAGGABLE BOTTOM SHEET
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: GestureDetector(
-                    onVerticalDragUpdate: (details) {
-                      setState(() {
-                        // Update sheet height based on drag
-                        _sheetHeight -= details.delta.dy / screenHeight;
-                        // Clamp between 10% (minimized) and 60% (expanded)
-                        _sheetHeight = _sheetHeight.clamp(0.1, 0.6);
-                      });
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 0),
-                      height: screenHeight * _sheetHeight,
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        gradient: AppColors.darkGradient,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                        border: Border.all(color: AppColors.border, width: 1),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.shadow,
-                            blurRadius: 10,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: SingleChildScrollView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Drag handle
-                            Center(
-                              child: Container(
-                                width: 40,
-                                height: 4,
-                                margin: const EdgeInsets.only(bottom: 12),
-                                decoration: BoxDecoration(
-                                  color: AppColors.textDisabled,
-                                  borderRadius: BorderRadius.circular(2),
-                                ),
-                              ),
-                            ),
-
-                            // SEARCH BOX
-                            InkWell(
-                              onTap: () => Get.to(() => const RouteScreen()),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                  horizontal: 15,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppColors.cardBackground,
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: AppColors.border),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.search,
-                                      size: 24,
-                                      color: AppColors.textPrimary,
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      "Where to?",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700,
-                                        color: AppColors.textPrimary,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            const SizedBox(height: 15),
-
-                            Text(
-                              "Recent locations",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            _recentTile(
-                              "Shaheed Bhagat Singh International Airport",
-                              "Chandigarh Airport",
-                            ),
-                            _recentTile(
-                              "Railway station, Near Ghanta Ghar, Jagraon bridge entry gate",
-                              "Ludhiana Railway Station",
+      
+                  // MENU BUTTON (TOP LEFT)
+                  Positioned(
+                    top: 50,
+                    left: 16,
+                    child: Builder(
+                      builder: (context) => Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.cardBackground,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.shadow,
+                              spreadRadius: 1,
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
                             ),
                           ],
                         ),
+                        child: IconButton(
+                          icon: Icon(Icons.menu, color: AppColors.textPrimary),
+                          onPressed: () => Scaffold.of(context).openDrawer(),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
+      
+                  // DRAGGABLE BOTTOM SHEET
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: GestureDetector(
+                      onVerticalDragUpdate: (details) {
+                        setState(() {
+                          // Update sheet height based on drag
+                          _sheetHeight -= details.delta.dy / screenHeight;
+                          // Clamp between 10% (minimized) and 60% (expanded)
+                          _sheetHeight = _sheetHeight.clamp(0.1, 0.6);
+                        });
+                      },
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 0),
+                        height: screenHeight * _sheetHeight,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          gradient: AppColors.darkGradient,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                          border: Border.all(color: AppColors.border, width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.shadow,
+                              blurRadius: 10,
+                              spreadRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Drag handle
+                              Center(
+                                child: Container(
+                                  width: 40,
+                                  height: 4,
+                                  margin: const EdgeInsets.only(bottom: 12),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.textDisabled,
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                ),
+                              ),
+      
+                              // SEARCH BOX
+                              InkWell(
+                                onTap: () => Get.to(() => const RouteScreen()),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                    horizontal: 15,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.cardBackground,
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: AppColors.border),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.search,
+                                        size: 24,
+                                        color: AppColors.textPrimary,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        "Where to?",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                          color: AppColors.textPrimary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+      
+                              const SizedBox(height: 15),
+      
+                              Text(
+                                "Recent locations",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textPrimary,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              _recentTile(
+                                "Shaheed Bhagat Singh International Airport",
+                                "Chandigarh Airport",
+                              ),
+                              _recentTile(
+                                "Railway station, Near Ghanta Ghar, Jagraon bridge entry gate",
+                                "Ludhiana Railway Station",
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+      ),
     );
   }
 
