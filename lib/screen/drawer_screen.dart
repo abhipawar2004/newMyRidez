@@ -159,8 +159,8 @@ class AppDrawer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.cardBackground.withOpacity(0.65),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.border, width: 1),
+          // borderRadius: BorderRadius.circular(12),
+          // border: Border.all(color: AppColors.border, width: 1),
         ),
         child: ListTile(
           shape: RoundedRectangleBorder(
